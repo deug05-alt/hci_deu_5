@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>차근차근 와이어프레임</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#e9ecef;font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif;color:#222}
+h1{text-align:center;font-size:20px;margin:24px 16px 4px}
+.sub{text-align:center;font-size:13px;color:#666;margin:0 16px 20px}
+.board{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;padding:0 16px 40px}
+figure{margin:0;width:300px}
+figcaption{font-size:13px;font-weight:700;margin-bottom:8px}
+figcaption small{display:block;font-weight:400;color:#666}
+.phone{height:580px;background:#fff;border:2px solid #333;border-radius:22px;padding:18px 16px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.bar{height:6px;background:#ddd;border-radius:9px}.bar i{display:block;height:100%;width:var(--p);background:#555;border-radius:9px}
+.step{font-size:11px;color:#777}
+h2{font-size:19px;margin:4px 0;line-height:1.4}
+p{font-size:12px;color:#555;margin:0}
+.img{height:120px;background:#ddd;border:1px dashed #999;display:grid;place-items:center;font-size:12px;color:#777;border-radius:10px}
+.opt{border:1.5px solid #888;border-radius:10px;padding:13px;font-size:13px}
+.opt.on{background:#333;color:#fff;border-color:#333}
+.btn{margin-top:auto;background:#333;color:#fff;text-align:center;padding:13px;border-radius:10px;font-size:14px;font-weight:700}
+.btn.ghost{background:#fff;color:#333;border:1.5px solid #333;margin-top:0}
+.slider{height:6px;background:#ccc;border-radius:9px;margin:16px 6px 4px;position:relative}
+.slider::after{content:"";position:absolute;left:35%;top:-7px;width:20px;height:20px;border-radius:50%;background:#333}
+.amount{font-size:26px;font-weight:700;text-align:center;margin:14px 0 0}
+.note{background:#f1f3f5;border-radius:8px;padding:10px;font-size:11px;color:#555}
+.stage{border:1.5px solid #333;border-radius:12px;padding:12px}
+.stage.lock{border-style:dashed;border-color:#aaa;color:#999}
+.stage b{font-size:13px}.stage .row{font-size:12px;margin-top:8px;display:flex;gap:8px;align-items:center}
+.cb{width:15px;height:15px;border:1.5px solid #333;border-radius:4px;flex:none}.cb.ck{background:#333}
+.term{text-decoration:underline dotted;font-weight:700}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:2px solid #333;border-radius:18px 18px 0 0;padding:16px;box-shadow:0 -10px 24px #0003;display:flex;flex-direction:column;gap:8px}
+.dim{position:absolute;inset:0;background:#0003}
+.tag{display:inline-block;font-size:10px;border:1px solid #888;border-radius:6px;padding:1px 6px;color:#555}
+.legend{max-width:720px;margin:0 auto 24px;padding:0 16px;font-size:12px;color:#555}
+</style>
+</head>
+<body>
+<h1>차근차근 와이어프레임 (저충실도)</h1>
+<p class="sub">docs/plan.md 기준 모바일 웹 · 질문 문구와 단계 구성은 초안이며 확정 전입니다</p>
+<div class="legend">회색 점선 박스는 이미지·일러스트 자리입니다. 질문 문항, 금액 구간, 체크리스트 항목은 예시이고 기획서의 미정 항목에 해당합니다.</div>
+<div class="board">
+
+<figure><figcaption>1. 시작 화면<small>회원가입 없이 바로 시작</small></figcaption>
+<div class="phone">
+  <div style="margin-top:30px" class="img">서비스 일러스트</div>
+  <h2>재테크, 뭐부터 해야 할지 막막하죠?<br>차근차근 알려드릴게요</h2>
+  <p>질문 3개에 답하면 나에게 맞는 시작 순서를 알려 드려요. 1분이면 돼요.</p>
+  <div class="note">회원가입 없이 바로 시작 · 상품 판매 없음</div>
+  <div class="btn">시작하기</div>
+</div></figure>
+
+<figure><figcaption>2. 진단 ① 여유자금<small>한 화면 한 질문</small></figcaption>
+<div class="phone">
+  <div class="bar" style="--p:33%"><i></i></div><div class="step">1 / 3</div>
+  <h2>매달 모을 수 있는 돈은<br>어느 정도예요?</h2>
+  <p>정확하지 않아도 괜찮아요.</p>
+  <div class="opt">5만 원 미만</div>
+  <div class="opt on">5만 ~ 20만 원</div>
+  <div class="opt">20만 ~ 50만 원</div>
+  <div class="opt">50만 원 이상</div>
+  <div class="btn">다음</div>
+</div></figure>
+
+<figure><figcaption>3. 진단 ② 손실 불안<small>한 화면 한 질문</small></figcaption>
+<div class="phone">
+  <div class="bar" style="--p:66%"><i></i></div><div class="step">2 / 3</div>
+  <h2>투자한 돈이 줄어들면<br>어떨 것 같아요?</h2>
+  <div class="opt">조금만 줄어도 잠이 안 와요</div>
+  <div class="opt on">조금은 괜찮지만 많이 줄면 힘들어요</div>
+  <div class="opt">어느 정도 줄어드는 건 감수할 수 있어요</div>
+  <div class="note">정답은 없어요. 나에게 맞는 속도를 찾기 위한 질문이에요.</div>
+  <div class="btn">다음</div>
+</div></figure>
+
+<figure><figcaption>4. 진단 ③ 수입 안정성<small>한 화면 한 질문</small></figcaption>
+<div class="phone">
+  <div class="bar" style="--p:100%"><i></i></div><div class="step">3 / 3</div>
+  <h2>매달 들어오는 수입은<br>어떤가요?</h2>
+  <div class="opt on">월급처럼 매달 비슷해요</div>
+  <div class="opt">달마다 차이가 있어요</div>
+  <div class="opt">아직 정해진 수입이 없어요</div>
+  <div class="btn">다음</div>
+</div></figure>
+
+<figure><figcaption>5. 손실 한도 설정<small>감당 가능한 최대 손실</small></figcaption>
+<div class="phone">
+  <div class="step">마지막 단계</div>
+  <h2>이만큼까지는<br>잃어도 괜찮다 싶은 금액은요?</h2>
+  <p>이 금액 안에서만 다음 단계를 열어 드려요.</p>
+  <div class="amount">100,000원</div>
+  <div class="slider"></div>
+  <div style="display:flex;justify-content:space-between;font-size:11px;color:#777"><span>0원</span><span>50만 원</span></div>
+  <div class="note">월 모을 수 있는 금액(5만~20만 원)을 기준으로 추천한 값이에요. 직접 바꿀 수 있어요.</div>
+  <div class="btn">내 로드맵 보기</div>
+</div></figure>
+
+<figure><figcaption>6. 맞춤 로드맵 (체크리스트)<small>현재 단계만 펼침, 나머지는 접힘</small></figcaption>
+<div class="phone">
+  <h2>내 시작 로드맵</h2>
+  <p>5~20만 원 · 안정 우선 · 월급형</p>
+  <div class="stage"><b>1단계 · 파킹통장 만들기 <span class="tag">진행 중</span></b>
+    <div class="row"><span class="cb ck"></span>입출금 통장 잔고 확인하기</div>
+    <div class="row"><span class="cb"></span><span class="term">파킹통장</span>이 뭔지 알아보기</div>
+    <div class="row"><span class="cb"></span>비상금 3만 원 옮겨 보기</div></div>
+  <div class="stage lock"><b>2단계 · 적금 시작하기</b></div>
+  <div class="stage lock"><b>3단계 · ISA 알아보기</b></div>
+  <div class="stage lock"><b>4단계 · 소액 주식 <span class="tag">손실 한도 10만 원</span></b></div>
+  <div class="btn ghost" style="margin-top:auto">진단 다시 하기</div>
+</div></figure>
+
+<figure><figcaption>7. 용어 사전 (바텀시트)<small>밑줄 친 용어를 누르면 열림</small></figcaption>
+<div class="phone">
+  <h2>내 시작 로드맵</h2>
+  <div class="stage"><b>1단계 · 파킹통장 만들기</b>
+    <div class="row"><span class="cb"></span><span class="term">파킹통장</span>이 뭔지 알아보기</div></div>
+  <div class="dim"></div>
+  <div class="sheet">
+    <b style="font-size:16px">파킹통장</b>
+    <p>주차장에 차를 잠깐 세워 두듯, 돈을 잠깐 넣어 두어도 이자를 주는 통장이에요. 언제든 꺼낼 수 있어요.</p>
+    <div class="note"><b>예시</b> 월급날 전까지 잠깐 두는 비상금</div>
+    <div class="note"><b>주의</b> 이자가 적금보다 낮을 수 있어요</div>
+    <div class="btn ghost" style="margin-top:6px">닫기</div>
+  </div>
+</div></figure>
+
+</div>
+</body>
+</html>
