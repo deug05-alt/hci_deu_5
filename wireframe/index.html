@@ -37,6 +37,8 @@ p{font-size:12px;color:#555;margin:0}
 .tag{display:inline-block;font-size:10px;border:1px solid #888;border-radius:6px;padding:1px 6px;color:#555}
 .legal{position:absolute;left:16px;right:16px;bottom:10px;z-index:3;text-align:center;font-size:10px;color:#777;border-top:1px dashed #888;padding-top:6px;background:#fff}
 .idx{margin:10px 0 0;padding-left:18px;line-height:1.7}
+figure:target .phone{box-shadow:0 0 0 4px #888}
+figure{scroll-margin-top:16px}
 .legend{max-width:720px;margin:0 auto 24px;padding:0 16px;font-size:12px;color:#555}
 </style>
 </head>
@@ -50,10 +52,11 @@ p{font-size:12px;color:#555;margin:0}
 <li><b>4단계(소액 주식), 열 때 순서</b> 5 손실 한도 → 8 안내 → 9 금액 입력 · 15 하락 대응 규칙</li>
 <li><b>한도 변경</b> 10 한도 올리기 재진단</li>
 <li><b>진단 답에 따른 분기</b> 11 여유자금 적음 · 12 수입 불규칙 · 14 손실 불안 큼</li>
+<li><b>바로 가기</b> 주소 끝에 #s1 ~ #s15를 붙이면 해당 화면으로 이동합니다 (예: #s11)</li>
 </ul></div>
 <div class="board">
 
-<figure><figcaption>1. 시작 화면<small>회원가입 없이 바로 시작</small></figcaption>
+<figure id="s1"><figcaption>1. 시작 화면<small>회원가입 없이 바로 시작</small></figcaption>
 <div class="phone">
   <div style="margin-top:30px" class="img">서비스 일러스트</div>
   <div class="step" style="font-weight:700">막막할 땐, 차근차근</div>
@@ -65,7 +68,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>2. 진단 ① 여유자금<small>한 화면 한 질문</small></figcaption>
+<figure id="s2"><figcaption>2. 진단 ① 여유자금<small>한 화면 한 질문</small></figcaption>
 <div class="phone">
   <div class="bar" style="--p:33%"><i></i></div><div class="step">1 / 3</div>
   <h2>매달 모을 수 있는 돈은<br>어느 정도예요?</h2>
@@ -78,7 +81,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>3. 진단 ② 손실 불안<small>한 화면 한 질문</small></figcaption>
+<figure id="s3"><figcaption>3. 진단 ② 손실 불안<small>한 화면 한 질문</small></figcaption>
 <div class="phone">
   <div class="bar" style="--p:66%"><i></i></div><div class="step">2 / 3</div>
   <h2>투자한 돈이 줄어들면<br>어떨 것 같아요?</h2>
@@ -90,7 +93,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>4. 진단 ③ 수입 안정성<small>한 화면 한 질문</small></figcaption>
+<figure id="s4"><figcaption>4. 진단 ③ 수입 안정성<small>한 화면 한 질문</small></figcaption>
 <div class="phone">
   <div class="bar" style="--p:100%"><i></i></div><div class="step">3 / 3</div>
   <h2>매달 들어오는 수입은<br>어떤가요?</h2>
@@ -101,7 +104,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>5. 손실 한도 설정<small>4단계를 처음 열 때 (6번 다음)</small></figcaption>
+<figure id="s5"><figcaption>5. 손실 한도 설정<small>4단계를 처음 열 때 (6번 다음)</small></figcaption>
 <div class="phone">
   <div class="step">4단계 · 소액 주식 · 시작 전</div>
   <h2>이만큼까지는<br>잃어도 괜찮다 싶은 금액은요?</h2>
@@ -114,7 +117,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>6. 맞춤 로드맵 (체크리스트)<small>현재 단계만 펼침, 나머지는 접힘</small></figcaption>
+<figure id="s6"><figcaption>6. 맞춤 로드맵 (체크리스트)<small>현재 단계만 펼침, 나머지는 접힘</small></figcaption>
 <div class="phone">
   <h2>내 시작 로드맵</h2>
   <p>5~20만 원 · 안정 우선 · 월급형</p>
@@ -130,7 +133,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>7. 용어 사전 (바텀시트)<small>밑줄 친 용어를 누르면 열림</small></figcaption>
+<figure id="s7"><figcaption>7. 용어 사전 (바텀시트)<small>밑줄 친 용어를 누르면 열림</small></figcaption>
 <div class="phone">
   <h2>내 시작 로드맵</h2>
   <div class="stage"><b>1단계 · 파킹통장 만들기</b>
@@ -147,7 +150,7 @@ p{font-size:12px;color:#555;margin:0}
 </div></figure>
 
 
-<figure><figcaption>8. 4단계 열기 전 안내<small>읽고 확인해야 넘어가는 필수 화면</small></figcaption>
+<figure id="s8"><figcaption>8. 4단계 열기 전 안내<small>읽고 확인해야 넘어가는 필수 화면</small></figcaption>
 <div class="phone">
   <div class="step">4단계 · 소액 주식</div>
   <h2>시작하기 전에<br>꼭 알아 두세요</h2>
@@ -160,7 +163,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>9. 4단계 투자 금액 입력<small>한도를 넘는 금액은 막고 이유 안내</small></figcaption>
+<figure id="s9"><figcaption>9. 4단계 투자 금액 입력<small>한도를 넘는 금액은 막고 이유 안내</small></figcaption>
 <div class="phone">
   <div class="step">4단계 · 소액 주식</div>
   <h2>얼마로 시작해 볼까요?</h2>
@@ -173,7 +176,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>10. 한도 올리기 재진단<small>질문 1개 후 위험 안내, 확인하면 변경</small></figcaption>
+<figure id="s10"><figcaption>10. 한도 올리기 재진단<small>질문 1개 후 위험 안내, 확인하면 변경</small></figcaption>
 <div class="phone">
   <div class="step">손실 한도 변경 · 60,000원 → 120,000원</div>
   <h2>투자한 돈이 줄어들면<br>어떨 것 같아요?</h2>
@@ -185,7 +188,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>11. 로드맵: 여유자금 5만 원 미만<small>0~2단계만 표시, 하단에서 다시 열기</small></figcaption>
+<figure id="s11"><figcaption>11. 로드맵: 여유자금 5만 원 미만<small>0~2단계만 표시, 하단에서 다시 열기</small></figcaption>
 <div class="phone">
   <h2>내 시작 로드맵</h2>
   <p>5만 원 미만 · 안정 우선 · 월급형</p>
@@ -200,7 +203,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>12. 로드맵: 수입이 달라지는 경우<small>2단계 앞에 유연한 상품 안내, 낮은 금액 제안</small></figcaption>
+<figure id="s12"><figcaption>12. 로드맵: 수입이 달라지는 경우<small>2단계 앞에 유연한 상품 안내, 낮은 금액 제안</small></figcaption>
 <div class="phone">
   <h2>2단계 · 적금 시작하기</h2>
   <p>5~20만 원 · 안정 우선 · 달마다 수입 차이</p>
@@ -213,7 +216,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>13. 1단계 상세 + 행동 지원<small>은행 앱 화면 순서 안내 + 안전 안내, 특정 은행 연결 없음</small></figcaption>
+<figure id="s13"><figcaption>13. 1단계 상세 + 행동 지원<small>은행 앱 화면 순서 안내 + 안전 안내, 특정 은행 연결 없음</small></figcaption>
 <div class="phone">
   <div class="step">1단계 · 파킹통장 만들기</div>
   <div class="stage"><div class="row" style="margin-top:0"><span class="cb ck"></span>파킹통장이 뭔지 알아보기</div>
@@ -226,7 +229,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>14. 로드맵: 손실 불안이 큰 경우<small>4단계 숨김, 3단계까지 표시</small></figcaption>
+<figure id="s14"><figcaption>14. 로드맵: 손실 불안이 큰 경우<small>4단계 숨김, 3단계까지 표시</small></figcaption>
 <div class="phone">
   <h2>내 시작 로드맵</h2>
   <p>5~20만 원 · 잠이 안 올 만큼 불안 · 월급형</p>
@@ -242,7 +245,7 @@ p{font-size:12px;color:#555;margin:0}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div></figure>
 
-<figure><figcaption>15. 4단계 하락 대응 규칙<small>체크리스트 항목, 내 규칙을 미리 정하기</small></figcaption>
+<figure id="s15"><figcaption>15. 4단계 하락 대응 규칙<small>체크리스트 항목, 내 규칙을 미리 정하기</small></figcaption>
 <div class="phone">
   <div class="step">4단계 · 소액 주식</div>
   <h2>값이 내려갔을 때<br>어떻게 할지 미리 정해요</h2>
