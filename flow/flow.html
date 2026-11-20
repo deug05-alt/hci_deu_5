@@ -4,6 +4,76 @@
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script></head><body>
 <h1>차근차근 서비스 플로우</h1>
 <p class="lg"><span><i style="background:#e8f1ff;border:1px solid #4a7fd6"></i>와이어프레임 있음</span><span><i style="background:#fff4e0;border:1px dashed #d68a1a"></i>와이어프레임 없음</span><span><i style="background:#ffecec;border:1px dashed #c44"></i>새 화면</span></p>
+<h2>전체 서비스 플로우</h2>
+<p class="lg">굵은 화살표는 핵심 플로우(기본 흐름)예요. 점선은 갈림길이나 돌아오는 길이에요. 한도 올리기 재진단(4.5)은 투자 금액 입력(4.3)의 '한도 바꾸기'에서 들어와요.</p>
+<div class="box"><pre class="mermaid">
+flowchart LR
+  subgraph G1["1 시작"]
+    S1_0["시작 화면 1.0"]
+  end
+  subgraph G2["2 진단"]
+    S2_1["진단 1 여유자금 2.1"]
+    S2_2["진단 2 손실 불안 2.2"]
+    S2_3["진단 3 수입 안정성 2.3"]
+  end
+  subgraph G3["3 로드맵"]
+    S3_0["로드맵 3.0"]
+    S3_0A["로드맵 여유자금 적음 3.0a"]
+    S3_0B["로드맵 불안 큼 3.0b"]
+    S3_1["용어 사전 3.1"]
+    S3_2["1단계 상세 3.2"]
+    S3_3["2단계 상세 3.3"]
+    N3_4["3단계 상세 3.4 새 화면"]
+  end
+  subgraph G4["4 4단계"]
+    S4_1["손실 한도 설정 4.1"]
+    S4_2["필수 안내 4.2"]
+    S4_3["투자 금액 입력 4.3"]
+    S4_4["하락 대응 규칙 4.4"]
+    S4_5["한도 올리기 재진단 4.5"]
+  end
+  S1_0 ==>|"시작하기"| S2_1
+  S1_0 -.->|"기록이 있음"| S3_0
+  S2_1 ==> S2_2
+  S2_2 ==> S2_3
+  S2_2 -.->|"이전 질문"| S2_1
+  S2_3 -.->|"이전 질문"| S2_2
+  S2_3 ==> S3_0
+  S2_3 -->|"여유자금 5만 원 미만"| S3_0A
+  S2_3 -->|"손실 불안 큼"| S3_0B
+  S3_0 -.-> S3_1
+  S3_0A -.-> S3_1
+  S3_0B -.-> S3_1
+  S3_1 -.->|"닫기"| S3_0
+  S3_0 -.-> S3_2
+  S3_0A -.-> S3_2
+  S3_0B -.-> S3_2
+  S3_2 -.->|"다 했어요"| S3_0
+  S3_0 --> S3_3
+  S3_3 --> S3_0
+  S3_0B --> S3_3
+  S3_3 --> S3_0B
+  S3_0 --> N3_4
+  S3_0B --> N3_4
+  N3_4 --> S3_0
+  S3_0A -.->|"상황이 바뀌었어요"| S2_1
+  S3_0B -.->|"상황이 바뀌었어요"| S2_1
+  S3_0 ==>|"4단계 카드"| S4_1
+  S4_1 ==> S4_2
+  S4_2 ==> S4_3
+  S4_3 ==> S4_4
+  S4_3 -.->|"한도 초과는 머무름"| S4_3
+  S4_3 -.->|"한도 바꾸기"| S4_5
+  S4_5 -.->|"확인하고 한도 바꾸기"| S4_3
+  S4_4 ==>|"저장"| S3_0
+  S4_1 -.->|"뒤로 가기"| S3_0
+  S4_2 -.->|"뒤로 가기"| S3_0
+  classDef has fill:#e8f1ff,stroke:#4a7fd6
+  classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
+  classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
+  class S1_0,S2_1,S2_2,S2_3,S3_0,S3_0A,S3_0B,S3_1,S3_2,S3_3,S4_1,S4_2,S4_3,S4_4,S4_5 has
+  class N3_4 new
+</pre></div>
 <h2>플로우 1: 기본 흐름 진단 → 로드맵 → 4단계 (핵심)</h2>
 <div class="box"><pre class="mermaid">
 flowchart LR
@@ -24,12 +94,85 @@ flowchart LR
   S4_2 -.->|"뒤로 가기"| S3_0
   S4_2 -->|"확인 체크 후 4단계 시작하기"| S4_3["4단계 투자 금액 입력 4.3"]
   S4_3 -.->|"한도 초과 입력은 막고 이유 안내"| S4_3
+  S4_3 -.->|"한도 바꾸기"| S4_5["한도 올리기 재진단 4.5"]
+  S4_5 -.->|"확인하고 한도 바꾸기"| S4_3
   S4_3 -->|"금액 정함"| S4_4["4단계 하락 대응 규칙 4.4"]
   S4_4 -->|"내 규칙으로 저장 4단계 완료 표시"| S3_0
   classDef has fill:#e8f1ff,stroke:#4a7fd6
   classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
   classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
-  class S1_0,S2_1,S2_2,S2_3,S3_0,S3_1,S4_1,S4_2,S4_3,S4_4 has
+  class S1_0,S2_1,S2_2,S2_3,S3_0,S3_1,S4_1,S4_2,S4_3,S4_4,S4_5 has
+</pre></div>
+<h2>플로우 2: 여유자금이 적은 경우 시나리오 A</h2>
+<div class="box"><pre class="mermaid">
+flowchart LR
+  S1_0["시작 화면 1.0"] -->|"시작하기"| S2_1["진단 1 여유자금 2.1"]
+  S1_0 -.->|"기기에 기록이 있음"| S3_0A
+  S2_1 -->|"5만 원 미만을 고르고 다음"| S2_2["진단 2 손실 불안 2.2"]
+  S2_2 -->|"다음"| S2_3["진단 3 수입 안정성 2.3"]
+  S2_2 -.->|"이전 질문"| S2_1
+  S2_3 -->|"다음"| S3_0A["로드맵 여유자금 5만 원 미만 3.0a"]
+  S2_3 -.->|"이전 질문"| S2_2
+  S3_0A -.->|"밑줄 친 용어 누름"| S3_1["용어 사전 3.1"]
+  S3_1 -.->|"닫기"| S3_0A
+  S3_0A -->|"항목 체크 0단계에서 2단계까지 차례로 열림"| S3_0A
+  S3_0A -.->|"상황이 바뀌었어요"| S2_1
+  S3_0A -.->|"1단계 비상금 소액 옮겨 보기 항목 누름"| S3_2["1단계 상세와 행동 지원 3.2"]
+  S3_2 -.->|"다 했어요"| S3_0A
+  classDef has fill:#e8f1ff,stroke:#4a7fd6
+  classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
+  classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
+  class S1_0,S2_1,S2_2,S2_3,S3_0A,S3_1,S3_2 has
+</pre></div>
+<h2>플로우 3: 수입이 달라지는 경우 시나리오 B</h2>
+<div class="box"><pre class="mermaid">
+flowchart LR
+  S1_0["시작 화면 1.0"] -->|"시작하기"| S2_1["진단 1 여유자금 2.1"]
+  S1_0 -.->|"기기에 기록이 있음"| S3_0
+  S2_1 -->|"다음"| S2_2["진단 2 손실 불안 2.2"]
+  S2_2 -->|"다음"| S2_3["진단 3 수입 안정성 2.3"]
+  S2_2 -.->|"이전 질문"| S2_1
+  S2_3 -->|"달마다 차이가 있어요를 고르고 다음"| S3_0["맞춤 로드맵 3.0"]
+  S2_3 -.->|"이전 질문"| S2_2
+  S3_0 -.->|"밑줄 친 용어 누름"| S3_1["용어 사전 3.1"]
+  S3_1 -.->|"닫기"| S3_0
+  S3_0 -.->|"1단계 비상금 소액 옮겨 보기 항목 누름"| S3_2["1단계 상세와 행동 지원 3.2"]
+  S3_2 -.->|"다 했어요"| S3_0
+  S3_0 -->|"0단계 1단계 체크 2단계 열림"| S3_0
+  S3_0 -->|"열린 2단계 카드 누름"| S3_3["2단계 상세 3.3"]
+  S3_3 -->|"유연한 상품 안내 읽고 납입 금액 정하기 체크"| S3_0
+  S3_0 -->|"열린 3단계 카드 누름"| N3_4["3단계 상세 3.4 새 화면"]
+  N3_4 -->|"ISA 알아보고 써도 되는지 확인해 체크"| S3_0
+  classDef has fill:#e8f1ff,stroke:#4a7fd6
+  classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
+  classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
+  class S1_0,S2_1,S2_2,S2_3,S3_0,S3_1,S3_2,S3_3 has
+  class N3_4 new
+</pre></div>
+<h2>플로우 4: 손실 불안이 큰 경우 시나리오 C</h2>
+<div class="box"><pre class="mermaid">
+flowchart LR
+  S1_0["시작 화면 1.0"] -->|"시작하기"| S2_1["진단 1 여유자금 2.1"]
+  S1_0 -.->|"기기에 기록이 있음"| S3_0B
+  S2_1 -->|"다음"| S2_2["진단 2 손실 불안 2.2"]
+  S2_2 -->|"조금만 줄어도 잠이 안 와요를 고르고 다음"| S2_3["진단 3 수입 안정성 2.3"]
+  S2_2 -.->|"이전 질문"| S2_1
+  S2_3 -->|"다음"| S3_0B["로드맵 손실 불안이 큰 경우 3.0b"]
+  S2_3 -.->|"이전 질문"| S2_2
+  S3_0B -.->|"밑줄 친 용어 누름"| S3_1["용어 사전 3.1"]
+  S3_1 -.->|"닫기"| S3_0B
+  S3_0B -.->|"1단계 비상금 소액 옮겨 보기 항목 누름"| S3_2["1단계 상세와 행동 지원 3.2"]
+  S3_2 -.->|"다 했어요"| S3_0B
+  S3_0B -->|"열린 2단계 카드 누름"| S3_3["2단계 상세 3.3"]
+  S3_3 -->|"적금 알아보고 납입 금액 정해 체크"| S3_0B
+  S3_0B -->|"열린 3단계 카드 누름"| N3_4["3단계 상세 3.4 새 화면"]
+  N3_4 -->|"ISA 확인하고 체크"| S3_0B
+  S3_0B -.->|"상황이 바뀌었어요"| S2_1
+  classDef has fill:#e8f1ff,stroke:#4a7fd6
+  classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
+  classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
+  class S1_0,S2_1,S2_2,S2_3,S3_0B,S3_1,S3_2,S3_3 has
+  class N3_4 new
 </pre></div>
 <script>mermaid.initialize({startOnLoad:true,theme:"neutral",flowchart:{htmlLabels:true}})</script>
 </body></html>
