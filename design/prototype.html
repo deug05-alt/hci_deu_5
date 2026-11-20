@@ -1,0 +1,67 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>차근차근 프로토타입</title>
+<style>
+:root{--main:#2B4C7E;--main-soft:#E8EDF5;--accent:#F2B705;--accent-soft:#FFF6D9;--bg:#ffffff;--gray:#F3F5F9;--text:#1D1D1F;--sub:#55555C;--line:#D5DAE2;--radius:12px}
+*{box-sizing:border-box}body{margin:0;background:#eceef1;font-family:system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--text)}
+.device{width:390px;max-width:100%;min-height:780px;margin:24px auto;background:var(--bg);border-radius:28px;box-shadow:0 8px 30px rgba(0,0,0,.12);overflow:hidden;position:relative}
+.screen{display:none;min-height:780px}.screen.on{display:block}
+#toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:#222;color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;opacity:0;transition:.2s;pointer-events:none}#toast.on{opacity:1}
+#idx{position:fixed;right:16px;top:16px;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer}
+#list{position:fixed;right:16px;top:56px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px;display:none;max-height:70vh;overflow:auto;min-width:200px}#list.on{display:block}#list a{display:block;padding:6px 8px;color:var(--text);text-decoration:none;font-size:14px;border-radius:8px}#list a:hover{background:#f2f2f5}
+/* 공통 부품 스타일은 여기 아래에 */
+.wrap{min-height:780px;display:flex;flex-direction:column;padding:20px 20px 0}
+.grow{flex:1}
+.topbar{display:flex;align-items:center;justify-content:space-between;min-height:44px;font-size:13px;color:var(--sub)}
+.back{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;color:var(--main);font-size:15px;font-weight:700;text-decoration:none}
+.progress{height:6px;background:var(--gray);border-radius:6px;overflow:hidden;margin:4px 0 16px}.progress i{display:block;height:100%;background:var(--main)}
+h1.t{font-size:22px;font-weight:700;line-height:1.4;margin:8px 0 8px}
+h2.st{font-size:17px;font-weight:700;margin:0 0 6px}
+p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
+.s{font-size:13px;line-height:1.5;color:var(--sub)}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border:0;border-radius:var(--radius);background:var(--main);color:#fff;font-size:16px;font-weight:700;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn:active{filter:brightness(.88)}
+.btn.sub{background:#fff;color:var(--main);border:1.5px solid var(--main);min-height:48px}
+.btn[aria-disabled="true"]{background:var(--gray);color:var(--sub);pointer-events:none}
+.tbtn{display:inline-flex;align-items:center;min-height:44px;color:var(--main);font-size:14px;text-decoration:underline;background:none;border:0;cursor:pointer;font-family:inherit;padding:0}
+.opt{display:flex;align-items:center;width:100%;min-height:52px;padding:12px 16px;margin-bottom:10px;border:1.5px solid var(--line);border-radius:var(--radius);background:#fff;font-size:15px;color:var(--text);text-align:left;cursor:pointer;font-family:inherit}
+.opt.on{border-color:var(--main);background:var(--main-soft);font-weight:700}
+.card{border:1.5px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;background:#fff}
+.card.now{border-color:var(--main)}.card.lock{background:var(--gray);border-style:dashed;color:var(--sub)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent);color:var(--text);vertical-align:2px;margin-left:6px}
+.info{background:var(--main-soft);border-radius:var(--radius);padding:12px 14px;font-size:13px;line-height:1.6;color:var(--text);margin-bottom:10px}
+.warn{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:var(--radius);padding:12px 14px;font-size:13px;line-height:1.6;color:var(--text);margin-bottom:10px}
+.term{color:var(--main);text-decoration:underline dotted;text-underline-offset:3px;font-weight:700;cursor:pointer}
+.ph{display:flex;align-items:center;justify-content:center;background:var(--gray);border-radius:var(--radius);color:var(--sub);font-size:13px;min-height:140px;margin:8px 0 16px}
+.legal{margin:16px -20px 0;padding:12px 20px 16px;background:var(--gray);text-align:center;font-size:12px;color:var(--sub)}
+.alt{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:8px 0 4px}
+.alt button{font-size:12px;min-height:32px;padding:0 10px;border:1px dashed var(--line);background:#fff;border-radius:8px;color:var(--sub);cursor:pointer;font-family:inherit}
+</style></head><body>
+<button id="idx">화면 목록</button><div id="list"></div>
+<div class="device">
+<!-- 화면은 여기에 하나씩 추가: <section class="screen" id="1.0" data-name="홈"> ... </section> -->
+<section class="screen" id="1.0" data-name="시작 화면">
+<div class="wrap">
+  <div class="ph">서비스 일러스트 자리</div>
+  <p class="s" style="font-weight:700;color:var(--main);margin:0">막막할 땐, 차근차근</p>
+  <h1 class="t">재테크, 뭐부터 해야 할지 막막하죠?<br>차근차근 알려드릴게요</h1>
+  <p class="b">질문 3개에 답하면 나에게 맞는 시작 순서를 알려 드려요. 1분이면 돼요.</p>
+  <div class="info">회원가입 없이 바로 시작 · 상품 판매 없음</div>
+  <div class="info">기록은 이 기기에만 저장돼요. 기기를 바꾸거나 브라우저 데이터를 지우면 사라져요.</div>
+  <div class="grow"></div>
+  <a class="btn" id="s1_0go" href="#2.1">시작하기</a>
+  <div class="alt"><button onclick="s1_0(false)">처음 방문 보기</button><button onclick="s1_0(true)">기록이 있을 때 보기</button></div>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+<script>function s1_0(r){const b=document.getElementById("s1_0go");b.textContent=r?"이어서 하기":"시작하기";b.href=r?"#3.0":"#2.1";toast(r?"기록이 있을 때 모습이에요":"처음 방문 모습이에요")}</script>
+</section>
+<!-- 화면 끝 -->
+</div>
+<div id="toast"></div>
+<script>
+const S=[...document.querySelectorAll(".screen")],L=document.getElementById("list"),T=document.getElementById("toast");
+L.innerHTML=S.map(s=>`<a href="#${s.id}">${s.id} ${s.dataset.name||""}</a>`).join("");
+document.getElementById("idx").onclick=()=>L.classList.toggle("on");
+function toast(m){T.textContent=m;T.classList.add("on");clearTimeout(T._t);T._t=setTimeout(()=>T.classList.remove("on"),1600)}
+function show(){const id=decodeURIComponent(location.hash.slice(1));const t=S.find(s=>s.id===id)||S[0];if(id&&!S.some(s=>s.id===id))toast("아직 만들지 않은 화면이에요");S.forEach(s=>s.classList.toggle("on",s===t));L.classList.remove("on");window.scrollTo(0,0)}
+addEventListener("hashchange",show);show();
+</script></body></html>
