@@ -23,7 +23,7 @@ flowchart LR
     S3_1["용어 사전 3.1"]
     S3_2["1단계 상세 3.2"]
     S3_3["2단계 상세 3.3"]
-    N3_4["3단계 상세 3.4 새 화면"]
+    N3_4["3단계 상세 3.4"]
   end
   subgraph G4["4 4단계"]
     S4_1["손실 한도 설정 4.1"]
@@ -71,8 +71,7 @@ flowchart LR
   classDef has fill:#e8f1ff,stroke:#4a7fd6
   classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
   classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
-  class S1_0,S2_1,S2_2,S2_3,S3_0,S3_0A,S3_0B,S3_1,S3_2,S3_3,S4_1,S4_2,S4_3,S4_4,S4_5 has
-  class N3_4 new
+  class S1_0,S2_1,S2_2,S2_3,S3_0,S3_0A,S3_0B,S3_1,S3_2,S3_3,S4_1,S4_2,S4_3,S4_4,S4_5,N3_4 has
 </pre></div>
 <h2>플로우 1: 기본 흐름 진단 → 로드맵 → 4단계 (핵심)</h2>
 <div class="box"><pre class="mermaid">
@@ -141,13 +140,12 @@ flowchart LR
   S3_0 -->|"0단계 1단계 체크 2단계 열림"| S3_0
   S3_0 -->|"열린 2단계 카드 누름"| S3_3["2단계 상세 3.3"]
   S3_3 -->|"유연한 상품 안내 읽고 납입 금액 정하기 체크"| S3_0
-  S3_0 -->|"열린 3단계 카드 누름"| N3_4["3단계 상세 3.4 새 화면"]
+  S3_0 -->|"열린 3단계 카드 누름"| N3_4["3단계 상세 3.4"]
   N3_4 -->|"ISA 알아보고 써도 되는지 확인해 체크"| S3_0
   classDef has fill:#e8f1ff,stroke:#4a7fd6
   classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
   classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
-  class S1_0,S2_1,S2_2,S2_3,S3_0,S3_1,S3_2,S3_3 has
-  class N3_4 new
+  class S1_0,S2_1,S2_2,S2_3,S3_0,S3_1,S3_2,S3_3,N3_4 has
 </pre></div>
 <h2>플로우 4: 손실 불안이 큰 경우 시나리오 C</h2>
 <div class="box"><pre class="mermaid">
@@ -165,14 +163,13 @@ flowchart LR
   S3_2 -.->|"다 했어요"| S3_0B
   S3_0B -->|"열린 2단계 카드 누름"| S3_3["2단계 상세 3.3"]
   S3_3 -->|"적금 알아보고 납입 금액 정해 체크"| S3_0B
-  S3_0B -->|"열린 3단계 카드 누름"| N3_4["3단계 상세 3.4 새 화면"]
+  S3_0B -->|"열린 3단계 카드 누름"| N3_4["3단계 상세 3.4"]
   N3_4 -->|"ISA 확인하고 체크"| S3_0B
   S3_0B -.->|"상황이 바뀌었어요"| S2_1
   classDef has fill:#e8f1ff,stroke:#4a7fd6
   classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
   classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
-  class S1_0,S2_1,S2_2,S2_3,S3_0B,S3_1,S3_2,S3_3 has
-  class N3_4 new
+  class S1_0,S2_1,S2_2,S2_3,S3_0B,S3_1,S3_2,S3_3,N3_4 has
 </pre></div>
 <script>mermaid.initialize({startOnLoad:true,theme:"neutral",flowchart:{htmlLabels:true}})</script>
 </body></html>
