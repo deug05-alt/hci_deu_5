@@ -1,0 +1,195 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>한 장 요약</title>
+<style id="proto-style">
+
+:root{--main:#2B4C7E;--main-soft:#E8EDF5;--accent:#F2B705;--accent-soft:#FFF6D9;--bg:#ffffff;--gray:#F3F5F9;--text:#1D1D1F;--sub:#55555C;--line:#D5DAE2;--radius:12px}
+*{box-sizing:border-box}body{margin:0;background:#eceef1;font-family:system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--text)}
+.device{width:390px;max-width:100%;min-height:780px;margin:24px auto;background:var(--bg);border-radius:28px;box-shadow:0 8px 30px rgba(0,0,0,.12);overflow:hidden;position:relative}
+.screen{display:none;min-height:780px}.screen.on{display:block}
+#toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:#222;color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;opacity:0;transition:.2s;pointer-events:none}#toast.on{opacity:1}
+#idx{position:fixed;right:16px;top:16px;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer}
+#list{position:fixed;right:16px;top:56px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px;display:none;max-height:70vh;overflow:auto;min-width:200px}#list.on{display:block}#list a{display:block;padding:6px 8px;color:var(--text);text-decoration:none;font-size:14px;border-radius:8px}#list a:hover{background:#f2f2f5}
+/* 공통 부품 스타일은 여기 아래에 */
+.wrap{min-height:780px;display:flex;flex-direction:column;padding:20px 20px 0}
+.grow{flex:1}
+.topbar{display:flex;align-items:center;justify-content:space-between;min-height:44px;font-size:13px;color:var(--sub)}
+.back{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;color:var(--main);font-size:15px;font-weight:700;text-decoration:none}
+.progress{height:6px;background:var(--gray);border-radius:6px;overflow:hidden;margin:4px 0 16px}.progress i{display:block;height:100%;background:var(--main)}
+h1.t{font-size:22px;font-weight:700;line-height:1.4;margin:8px 0 8px}
+h2.st{font-size:17px;font-weight:700;margin:0 0 6px}
+p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
+.s{font-size:13px;line-height:1.5;color:var(--sub)}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border:0;border-radius:var(--radius);background:var(--main);color:#fff;font-size:16px;font-weight:700;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn:active{filter:brightness(.88)}
+.btn.sub{background:#fff;color:var(--main);border:1.5px solid var(--main);min-height:48px}
+.btn[aria-disabled="true"]{background:var(--gray);color:var(--sub);pointer-events:none}
+.tbtn{display:inline-flex;align-items:center;min-height:44px;color:var(--main);font-size:14px;text-decoration:underline;background:none;border:0;cursor:pointer;font-family:inherit;padding:0}
+.opt{display:flex;align-items:center;width:100%;min-height:52px;padding:12px 16px;margin-bottom:10px;border:1.5px solid var(--line);border-radius:var(--radius);background:#fff;font-size:15px;color:var(--text);text-align:left;cursor:pointer;font-family:inherit}
+.opt.on{border-color:var(--main);background:var(--main-soft);font-weight:700}
+.card{border:1.5px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;background:#fff}
+.card.now{border-color:var(--main)}.card.lock{background:var(--gray);border-style:dashed;color:var(--sub)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent);color:var(--text);vertical-align:2px;margin-left:6px}
+.info{background:var(--main-soft);border-radius:var(--radius);padding:12px 14px;font-size:13px;line-height:1.6;color:var(--text);margin-bottom:10px}
+.warn{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:var(--radius);padding:12px 14px;font-size:13px;line-height:1.6;color:var(--text);margin-bottom:10px}
+.term{color:var(--main);text-decoration:underline dotted;text-underline-offset:3px;font-weight:700;cursor:pointer}
+.ph{display:flex;align-items:center;justify-content:center;background:var(--gray);border-radius:var(--radius);color:var(--sub);font-size:13px;min-height:140px;margin:8px 0 16px}
+.legal{margin:16px -20px 0;padding:12px 20px 16px;background:var(--gray);text-align:center;font-size:12px;color:var(--sub)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:20px 20px 0 0;padding:22px 20px 24px;box-shadow:0 -8px 24px rgba(0,0,0,.15)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.chips button{min-height:44px;padding:0 12px;border:1.5px solid var(--line);border-radius:22px;background:#fff;font-size:14px;font-family:inherit;cursor:pointer;color:var(--text)}.chips button.on{border-color:var(--main);background:var(--main);color:#fff;font-weight:700}
+.item{display:flex;align-items:center;gap:10px;min-height:44px;font-size:15px}
+.cb{width:24px;height:24px;border:2px solid var(--main);border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:14px;cursor:pointer;background:#fff;position:relative}.cb::after{content:"";position:absolute;inset:-10px}.cb.on{background:var(--main)}
+.go{margin-left:auto;color:var(--main);font-size:13px;font-weight:700;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;white-space:nowrap}
+.inline{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding-left:34px;font-size:13px;color:var(--sub);margin-bottom:6px}.inline input{width:84px;min-height:44px;border:1.5px solid var(--line);border-radius:8px;padding:0 8px;font-size:15px;font-family:inherit}
+.card a.whole{display:block;text-decoration:none;color:inherit;min-height:44px}
+.tag.gray{background:var(--gray);border:1px solid var(--line)}
+.alt{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:8px 0 4px}
+.alt button{font-size:12px;min-height:32px;padding:0 10px;border:1px dashed var(--line);background:#fff;border-radius:8px;color:var(--sub);cursor:pointer;font-family:inherit}
+
+</style>
+<style>
+html,body{margin:0;background:#e9eaee;font-family:system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#1d1d1f}
+#rp-bar{position:sticky;top:0;z-index:5;display:flex;gap:12px;align-items:center;padding:10px 16px;background:#1d1d1f;color:#fff;font-size:14px}
+#rp-bar button{font:inherit;font-weight:600;padding:8px 16px;border:0;border-radius:8px;background:#fff;color:#1d1d1f;cursor:pointer}
+#rp-board{width:1600px;margin:20px auto;background:#fff;padding:40px 44px;box-sizing:border-box;display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.rp-head{grid-column:1/-1;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;border-bottom:3px solid #1d1d1f;padding-bottom:16px}
+.rp-head h1{margin:0;font-size:40px;line-height:1.15}.rp-head p{margin:6px 0 0;font-size:19px;color:#444}.rp-meta{text-align:right;font-size:15px;color:#555;white-space:nowrap}
+.rp-card{border:1px solid #d9d9de;border-radius:14px;padding:18px 20px;min-width:0;background:#fff}
+.rp-card h2{margin:0 0 10px;font-size:15px;letter-spacing:.04em;color:#666;font-weight:600}
+.rp-card ul,.rp-card ol{margin:0;padding-left:20px;font-size:16px;line-height:1.55}.rp-card p{margin:0;font-size:16px;line-height:1.55}
+.rp-steps{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.rp-step{border-radius:12px;background:#f3f4f7;padding:14px 16px}.rp-step b{display:block;font-size:17px;margin-bottom:4px}.rp-step span{font-size:15px;color:#333;line-height:1.5}
+.rp-flow{grid-column:1/-1}.rp-flow .mermaid{margin:0;text-align:center}.rp-flow svg{max-width:100%;height:auto}
+.rp-check{grid-column:span 5}.rp-design{grid-column:span 3}.rp-decide{grid-column:span 4}
+.rp-table{width:100%;border-collapse:collapse;font-size:15px}.rp-table td,.rp-table th{border-top:1px solid #e3e3e8;padding:6px 6px;text-align:left;vertical-align:top}
+.rp-tag{display:inline-block;padding:1px 8px;border-radius:999px;font-size:13px;font-weight:600}.rp-ok{background:#e2f4e6;color:#1c6b2f}.rp-weak{background:#fff0d6;color:#8a5a00}.rp-miss{background:#ffe3e0;color:#a3261a}
+.rp-chips{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0}.rp-chip{display:flex;align-items:center;gap:8px;font-size:14px}.rp-chip i{width:28px;height:28px;border-radius:8px;border:1px solid #0002;display:inline-block}
+.rp-screens{grid-column:span 8}.rp-next{grid-column:span 4}
+.rp-shots{display:flex;gap:18px;flex-wrap:wrap}.rp-shotbox{width:195px}.rp-shotbox figcaption{font-size:14px;margin-top:8px;text-align:center;color:#333}
+.rp-shot{width:195px;height:390px;overflow:hidden;border:1px solid #cfcfd6;border-radius:16px;background:#fff;position:relative}
+.rp-shot>.screen{display:block!important;width:390px;min-height:780px;transform:scale(.5);transform-origin:0 0;pointer-events:none}
+.rp-empty{color:#888;font-size:15px}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+</head><body>
+<div id="rp-bar"><button id="rp-save">이미지로 저장</button><span id="rp-msg">아래 한 장이 그대로 이미지가 돼요.</span></div>
+<div id="rp-board">
+ <header class="rp-head"><div><h1>차근차근</h1><p>재테크를 시작하지 못하는 20대 사회초년생에게 쉬운 말로 단계별 시작 로드맵을 알려 주는 맞춤 온보딩 가이드 (모바일 웹, 회원가입 없음)</p></div><div class="rp-meta">5조<br>박정아, 강아라<br>2026-11-20</div></header>
+ <section class="rp-steps">
+  <div class="rp-step"><b>1. 자료 지도</b><span>기획서·퍼소나·인터뷰·와이어프레임 위치를 한 장에 정리하고 화면 16개에 ID를 붙임 (메뉴 구조는 초안)</span></div>
+  <div class="rp-step"><b>2. 서비스 플로우</b><span>플로우 4개 (핵심 1개 + 시나리오 A·B·C)와 전체 플로우, 화면 16개 점검. 새 화면 1개(3단계 상세) 추가</span></div>
+  <div class="rp-step"><b>3. 기획 점검</b><span>핵심 기능 8줄 중 들어감 6, 약함 1, 빠짐 1. 결정 8개를 플로우·와이어프레임·기획서에 반영</span></div>
+  <div class="rp-step"><b>4. 디자인</b><span>스타일 가이드를 정하고 화면 16개 중 16개를 눌러 볼 수 있는 화면으로 완성</span></div>
+ </section>
+ <section class="rp-card rp-flow"><h2>핵심 플로우</h2><pre class="mermaid">
+flowchart LR
+  S1_0["시작 화면 1.0"] -->|"시작하기"| S2_1["진단 1 여유자금 2.1"]
+  S1_0 -.->|"기록이 있으면 이어서 하기"| S3_0
+  S2_1 -->|"다음"| S2_2["진단 2 손실 불안 2.2"]
+  S2_2 -->|"다음"| S2_3["진단 3 수입 안정성 2.3"]
+  S2_2 -.->|"이전 질문"| S2_1
+  S2_3 -->|"다음"| S3_0["맞춤 로드맵 3.0"]
+  S2_3 -.->|"이전 질문"| S2_2
+  S3_0 -.->|"밑줄 친 용어 누름"| S3_1["용어 사전 3.1"]
+  S3_1 -.->|"닫기"| S3_0
+  S3_0 -->|"항목 체크 단계를 마치면 다음 단계 열림"| S3_0
+  S3_0 -.->|"이미 했어요 단계 전체 체크"| S3_0
+  S3_0 -->|"1단계 비상금 소액 옮겨 보기 항목 누름"| S3_2["1단계 상세와 행동 지원 3.2"]
+  S3_2 -->|"다 했어요"| S3_0
+  S3_0 -.->|"상황이 바뀌었어요"| S2_1
+  S3_0 -->|"3단계까지 마치고 4단계 카드 누름"| S4_1["손실 한도 설정 4.1"]
+  S4_1 -->|"다음"| S4_2["4단계 열기 전 필수 안내 4.2"]
+  S4_1 -.->|"뒤로 가기"| S3_0
+  S4_2 -.->|"뒤로 가기"| S3_0
+  S4_2 -->|"확인 체크 후 4단계 시작하기"| S4_3["4단계 투자 금액 입력 4.3"]
+  S4_3 -.->|"한도 초과 입력은 막고 이유 안내"| S4_3
+  S4_3 -.->|"한도 바꾸기"| S4_1
+  S4_1 -.->|"내리면 바로 적용"| S4_3
+  S4_1 -.->|"올리면 재진단"| S4_5["한도 올리기 재진단 4.5"]
+  S4_5 -.->|"확인하고 한도 바꾸기"| S4_3
+  S4_3 -->|"금액 정함"| S4_4["4단계 하락 대응 규칙 4.4"]
+  S4_4 -->|"내 규칙으로 저장 4단계 완료 표시"| S3_0
+  classDef has fill:#e8f1ff,stroke:#4a7fd6
+  classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
+  classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
+  class S1_0,S2_1,S2_2,S2_3,S3_0,S3_1,S3_2,S4_1,S4_2,S4_3,S4_4,S4_5 has
+ </pre></section>
+ <section class="rp-card rp-check"><h2>기획 점검 결과</h2><table class="rp-table"><tr><th>핵심 기능</th><th>판정</th><th>그래서</th></tr>
+  <tr><td>진단 질문 3개</td><td style="white-space:nowrap"><span class="rp-tag rp-ok">들어감</span></td><td></td></tr>
+  <tr><td>맞춤 로드맵(5단계 체크리스트)</td><td style="white-space:nowrap"><span class="rp-tag rp-ok">들어감</span></td><td></td></tr>
+  <tr><td>손실 한도 설정·올리기</td><td style="white-space:nowrap"><span class="rp-tag rp-ok">들어감</span></td><td></td></tr>
+  <tr><td>손실 한도 내리기</td><td style="white-space:nowrap"><span class="rp-tag rp-miss">빠짐</span></td><td>4.3의 '한도 바꾸기'에서 내리면 바로 적용, 올리면 재진단</td></tr>
+  <tr><td>4단계 필수 안내 화면</td><td style="white-space:nowrap"><span class="rp-tag rp-ok">들어감</span></td><td></td></tr>
+  <tr><td>쉬운 용어 사전</td><td style="white-space:nowrap"><span class="rp-tag rp-ok">들어감</span></td><td></td></tr>
+  <tr><td>단계별 화면 가이드(행동 지원)</td><td style="white-space:nowrap"><span class="rp-tag rp-weak">약함</span></td><td>핵심 플로우에 1단계 상세(3.2) 단계를 넣음</td></tr>
+  <tr><td>0단계 항목 적기 (구성 요소)</td><td style="white-space:nowrap"><span class="rp-tag rp-weak">약함</span></td><td>로드맵 안에서 항목을 펼쳐 바로 적음</td></tr>
+ </table></section>
+ <section class="rp-card rp-design"><h2>디자인 방향</h2><p>차분하다, 믿음직하다, 친절하다</p><div class="rp-chips"><span class="rp-chip"><i style="background:#2B4C7E"></i>주 색 #2B4C7E</span><span class="rp-chip"><i style="background:#F2B705"></i>강조 색 #F2B705</span><span class="rp-chip"><i style="background:#1D1D1F"></i>글자 #1D1D1F</span></div><p>기본 글꼴, 단정하고 또렷하게 (제목 22px 굵게, 본문 15px)</p></section>
+ <section class="rp-card rp-decide"><h2>우리가 내린 결정과 이유</h2><ol><li>단계마다 '이미 했어요'로 단계 전체를 한 번에 체크. 이미 아는 사용자가 항목을 하나씩 넘기는 것은 답답할 수 있음</li><li>재방문은 시작 화면부터, 기록이 있으면 버튼이 '이어서 하기'로. 시작 화면의 '버튼 하나' 결정을 지키고, 직접 눌러 들어가 당황스러움이 없음</li></ol></section>
+ <section class="rp-card rp-screens"><h2>주요 화면 (핵심 플로우 순서)</h2><div class="rp-shots">
+  <figure class="rp-shotbox" style="margin:0"><div class="rp-shot"><section class="screen" data-name="시작 화면">
+<div class="wrap">
+  <div class="ph">서비스 일러스트 자리</div>
+  <p class="s" style="font-weight:700;color:var(--main);margin:0">막막할 땐, 차근차근</p>
+  <h1 class="t">재테크, 뭐부터 해야 할지 막막하죠?<br>차근차근 알려드릴게요</h1>
+  <p class="b">질문 3개에 답하면 나에게 맞는 시작 순서를 알려 드려요. 1분이면 돼요.</p>
+  <div class="info">회원가입 없이 바로 시작 · 상품 판매 없음</div>
+  <div class="info">기록은 이 기기에만 저장돼요. 기기를 바꾸거나 브라우저 데이터를 지우면 사라져요.</div>
+  <div class="grow"></div>
+  <a class="btn" id="s1_0go" href="#2.1">시작하기</a>
+  
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+
+</section></div><figcaption>1.0 시작 화면</figcaption></figure>
+  <figure class="rp-shotbox" style="margin:0"><div class="rp-shot"><section class="screen" data-name="진단 1 여유자금">
+<div class="wrap">
+  <div class="topbar"><span>1 / 3</span><span></span></div>
+  <div class="progress"><i style="width:33%"></i></div>
+  <h1 class="t">매달 모을 수 있는 돈은<br>어느 정도예요?</h1>
+  <p class="s" style="margin:0 0 14px">정확하지 않아도 괜찮아요.</p>
+  <div data-q="money">
+    <button class="opt" data-v="u5" onclick="pick(this)">5만 원 미만</button>
+    <button class="opt" data-v="5_20" onclick="pick(this)">5만 ~ 20만 원</button>
+    <button class="opt" data-v="20_50" onclick="pick(this)">20만 ~ 50만 원</button>
+    <button class="opt" data-v="o50" onclick="pick(this)">50만 원 이상</button>
+  </div>
+  <div class="grow"></div>
+  <a class="btn" data-next="" aria-disabled="true" href="#2.2">다음</a>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section></div><figcaption>2.1 진단 1 여유자금</figcaption></figure>
+  <figure class="rp-shotbox" style="margin:0"><div class="rp-shot"><section class="screen" data-name="맞춤 로드맵">
+<div class="wrap"><div class="road" data-max="4"><h1 class="t">내 시작 로드맵</h1><p class="s" style="margin:0 0 12px">5~20만 원 · 안정 우선 · 월급형</p><div class="card now"><h2 class="st">0단계 · 용어·기초 익히기 <span class="tag">진행 중</span></h2><div class="item"><span class="cb" role="checkbox" aria-checked="false" onclick="toggle('s0i0')"></span><span>내 한 달 돈 흐름 적어 보기</span></div><div class="inline"><span style="width:72px">들어오는 돈</span><input inputmode="numeric" placeholder="원"></div><div class="inline"><span style="width:72px">나가는 돈</span><input inputmode="numeric" placeholder="원"></div><div class="item"><span class="cb" role="checkbox" aria-checked="false" onclick="toggle('s0i1')"></span><span>매달 모을 금액 정하기</span></div><div class="inline">월 <input inputmode="numeric" placeholder="원"> 원 (펼쳐서 바로 적어요)</div><button class="tbtn" onclick="already(0)">이미 했어요 (이 단계 전체 체크)</button></div><div class="card lock"><h2 class="st" style="margin:0">1단계 · 파킹통장 만들기</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><div class="card lock"><h2 class="st" style="margin:0">2단계 · 적금 시작하기</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><div class="card lock"><h2 class="st" style="margin:0">3단계 · ISA 알아보기</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><div class="card lock"><h2 class="st" style="margin:0">4단계 · 소액 주식 <span class="tag gray">시작 전 한도 설정</span></h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><p class="s">체크를 모두 마치면 다음 단계가 열려요. 진행 상황은 이 기기에만 저장돼요.</p><a class="btn sub" href="#2.1" onclick="toast('진단을 다시 시작해요')">상황이 바뀌었어요</a></div>
+  
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section></div><figcaption>3.0 맞춤 로드맵</figcaption></figure>
+  <figure class="rp-shotbox" style="margin:0"><div class="rp-shot"><section class="screen" data-name="손실 한도 설정">
+<div class="wrap">
+  <div class="topbar"><a class="back" href="#" onclick="return limitBack()">← 뒤로</a><span>4단계 · 소액 주식 · 시작 전</span></div>
+  <h1 class="t">이만큼까지는<br>잃어도 괜찮다 싶은 금액은요?</h1>
+  <div class="info">앞에서는 불안한 느낌을 물었어요. 여기서는 실제로 잃어도 괜찮은 금액을 정해요.</div>
+  <p class="s">이 금액 안에서만 다음 단계를 열어 드려요.</p>
+  <div style="font-size:30px;font-weight:700;text-align:center;margin:16px 0 4px" id="limitVal">60,000원</div>
+  <input type="range" id="limitRange" min="0" max="500000" step="10000" style="width:100%;height:44px;accent-color:var(--main)" oninput="limitInput()" value="60000">
+  <div class="s" style="display:flex;justify-content:space-between"><span>0원</span><span>50만 원</span></div>
+  <div class="info" id="limitWhy" style="margin-top:12px">모을 수 있는 금액(5~20만 원)과 불안 정도를 기준으로 추천한 값이에요(12.5만 원 × 50%). 직접 바꿀 수 있어요.</div>
+  <div class="grow"></div>
+  <a class="btn" href="#" onclick="return limitNext()">다음</a>
+  
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section></div><figcaption>4.1 손실 한도 설정</figcaption></figure>
+ </div></section>
+ <section class="rp-card rp-next"><h2>다음에 할 일</h2><ul><li>/design 점검으로 전체 화면 점검</li><li>사실 확인이 필요한 안내 문구 확인 (원금 보장 표기, 용어 사전, ISA 조건)</li><li>참여자 모집 후 사용성 테스트(6명) 진행</li></ul></section>
+</div>
+<script>
+mermaid.initialize({startOnLoad:true,theme:"neutral",flowchart:{htmlLabels:false}});
+document.getElementById("rp-save").onclick=async()=>{const m=document.getElementById("rp-msg");
+ if(!window.html2canvas){m.textContent="인터넷이 안 돼서 저장 도구를 못 불러왔어요. 화면 캡처로 저장하세요.";return}
+ m.textContent="만드는 중이에요.";
+ try{const c=await html2canvas(document.getElementById("rp-board"),{scale:1.5,backgroundColor:"#ffffff",useCORS:true});
+  const a=document.createElement("a");a.download="summary.png";a.href=c.toDataURL("image/png");a.click();m.textContent="summary.png 로 저장했어요. 다운로드 폴더를 확인하세요."}
+ catch(e){m.textContent="저장하지 못했어요. 화면 캡처로 저장하세요."}};
+</script></body></html>
