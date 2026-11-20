@@ -68,13 +68,17 @@ flowchart LR
   S4_1 -.->|"내리면 바로 적용"| S4_3
   S4_1 -.->|"올리면 재진단"| S4_5
   S4_5 -.->|"확인하고 한도 바꾸기"| S4_3
-  S4_4 ==>|"저장"| S3_0
+  S4_4 ==>|"저장"| N3_5["로드맵 완료 결과 3.5 새 화면"]
+  N3_5 ==>|"내 로드맵 보기"| S3_0
+  S3_0A -->|"0~2단계 모두 마침"| N3_5
+  S3_0B -->|"0~3단계 모두 마침"| N3_5
   S4_1 -.->|"뒤로 가기"| S3_0
   S4_2 -.->|"뒤로 가기"| S3_0
   classDef has fill:#e8f1ff,stroke:#4a7fd6
   classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
   classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
   class S1_0,S2_1,S2_2,S2_3,S3_0,S3_0A,S3_0B,S3_1,S3_2,S3_3,S4_1,S4_2,S4_3,S4_4,S4_5,N3_4 has
+  class N3_5 new
 </pre></div>
 <h2>플로우 1: 기본 흐름 진단 → 로드맵 → 4단계 (핵심)</h2>
 <div class="box"><pre class="mermaid">
@@ -104,11 +108,13 @@ flowchart LR
   S4_1 -.->|"올리면 재진단"| S4_5["한도 올리기 재진단 4.5"]
   S4_5 -.->|"확인하고 한도 바꾸기"| S4_3
   S4_3 -->|"금액 정함"| S4_4["4단계 하락 대응 규칙 4.4"]
-  S4_4 -->|"내 규칙으로 저장 4단계 완료 표시"| S3_0
+  S4_4 -->|"내 규칙으로 저장"| N3_5["로드맵 완료 결과 3.5 새 화면"]
+  N3_5 -->|"내 로드맵 보기"| S3_0
   classDef has fill:#e8f1ff,stroke:#4a7fd6
   classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
   classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
   class S1_0,S2_1,S2_2,S2_3,S3_0,S3_1,S3_2,S4_1,S4_2,S4_3,S4_4,S4_5 has
+  class N3_5 new
 </pre></div>
 <h2>플로우 2: 여유자금이 적은 경우 시나리오 A</h2>
 <div class="box"><pre class="mermaid">
@@ -124,12 +130,15 @@ flowchart LR
   S3_1 -.->|"닫기"| S3_0A
   S3_0A -->|"항목 체크 0단계에서 2단계까지 차례로 열림"| S3_0A
   S3_0A -.->|"상황이 바뀌었어요"| S2_1
+  S3_0A -->|"0~2단계 모두 마침"| N3_5["로드맵 완료 결과 3.5 새 화면"]
+  N3_5 -->|"내 로드맵 보기"| S3_0A
   S3_0A -.->|"1단계 비상금 소액 옮겨 보기 항목 누름"| S3_2["1단계 상세와 행동 지원 3.2"]
   S3_2 -.->|"다 했어요"| S3_0A
   classDef has fill:#e8f1ff,stroke:#4a7fd6
   classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
   classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
   class S1_0,S2_1,S2_2,S2_3,S3_0A,S3_1,S3_2 has
+  class N3_5 new
 </pre></div>
 <h2>플로우 3: 수입이 달라지는 경우 시나리오 B</h2>
 <div class="box"><pre class="mermaid">
@@ -173,11 +182,14 @@ flowchart LR
   S3_3 -->|"적금 알아보고 납입 금액 정해 체크"| S3_0B
   S3_0B -->|"열린 3단계 카드 누름"| N3_4["3단계 상세 3.4"]
   N3_4 -->|"ISA 확인하고 체크"| S3_0B
+  S3_0B -->|"0~3단계 모두 마침"| N3_5["로드맵 완료 결과 3.5 새 화면"]
+  N3_5 -->|"내 로드맵 보기"| S3_0B
   S3_0B -.->|"상황이 바뀌었어요"| S2_1
   classDef has fill:#e8f1ff,stroke:#4a7fd6
   classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
   classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
   class S1_0,S2_1,S2_2,S2_3,S3_0B,S3_1,S3_2,S3_3,N3_4 has
+  class N3_5 new
 </pre></div>
 <script>mermaid.initialize({startOnLoad:true,theme:"neutral",flowchart:{htmlLabels:true}})</script>
 </body></html>

@@ -212,7 +212,7 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
   <textarea id="own44" placeholder="내 규칙을 적어 주세요" style="display:none;width:100%;min-height:80px;border:1.5px solid var(--line);border-radius:var(--radius);padding:12px;font-size:15px;font-family:inherit;margin-bottom:10px"></textarea>
   <div class="info">내가 정한 규칙이에요. 차근차근은 사고팔 시점을 알려 주지 않아요.</div>
   <div class="grow"></div>
-  <a class="btn" data-next aria-disabled="true" href="#" onclick="st.cur=5;toast('저장됐어요');return goRoad()">내 규칙으로 저장</a>
+  <a class="btn" data-next aria-disabled="true" href="#" onclick="const o=this.closest('.screen').querySelector('[data-q=rule] .on');st.rule=o&&o.dataset.v==='own'?(document.getElementById('own44').value||'직접 쓴 규칙'):(o?o.textContent:'');st.cur=5;toast('저장됐어요');return goRoad()">내 규칙으로 저장</a>
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div>
 </section>
@@ -248,8 +248,8 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
   <div class="warn" id="flex33"><b>먼저 알아 두세요</b><br>금액을 자유롭게 넣는 유형(자유적금 등)도 있어요. 상품마다 조건이 다르니 확인해 보세요. 납입이 부담되면 중도 해지할 수 있지만 이자 혜택이 줄 수 있어요.</div>
   <div class="card now">
     <h2 class="st">체크리스트 <span class="tag">진행 중</span></h2>
-    <button class="opt" style="display:block" data-k="s2i0" onclick="tick(this)">☐ <span class="term" onclick="event.stopPropagation();term('적금')">적금</span>이 뭔지, 파킹통장과 뭐가 다른지 알아보기</button>
-    <button class="opt" style="display:block" data-k="s2i1" onclick="tick(this)">☐ 부담 없이 납입할 금액 정하기</button>
+    <button class="opt" style="display:block" data-k="s2i0" onclick="tick(this)"><span class="mk">☐</span> <span class="term" onclick="event.stopPropagation();term('적금')">적금</span>이 뭔지, 파킹통장과 뭐가 다른지 알아보기</button>
+    <button class="opt" style="display:block" data-k="s2i1" onclick="tick(this)"><span class="mk">☐</span> 부담 없이 납입할 금액 정하기</button>
     <div class="info" id="amt33" style="margin:0"></div>
   </div>
   <div class="grow"></div>
@@ -279,6 +279,21 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div>
 </section>
+<section class="screen" id="3.5" data-name="로드맵 완료 결과">
+<div class="wrap">
+  <div class="topbar"><span>결과</span><span id="road35"></span></div>
+  <h1 class="t" id="title35">모든 단계를 마쳤어요</h1>
+  <h2 class="st" style="margin-top:6px">해낸 것</h2>
+  <div class="card" id="done35"></div>
+  <h2 class="st" style="margin-top:6px">앞으로 필요한 것</h2>
+  <div class="info" id="next35"></div>
+  <div id="rule35"></div>
+  <div class="grow"></div>
+  <a class="btn" href="#" onclick="return goRoad()">내 로드맵 보기</a>
+  <div class="alt"><button onclick="st.road='3.0';st.cur=5;on35()">모든 단계를 마친 모습</button><button onclick="st.road='3.0a';st.cur=3;on35()">여유자금이 적어 0~2단계를 마친 모습</button></div>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
 <!-- 화면 끝 -->
 </div>
 <div id="toast"></div>
@@ -300,7 +315,8 @@ const floor1=n=>Math.max(10000,Math.floor(n/10000)*10000);
 const sumLine=()=>[LBL.money[A("money","5_20")],LBL.fear[A("fear","mid")],LBL.income[A("income","stable")]].join(" · ");
 
 function pick(b){const g=b.parentElement;g.querySelectorAll(".opt").forEach(x=>x.classList.remove("on"));b.classList.add("on");if(g.dataset.q in st.a)st.a[g.dataset.q]=b.dataset.v;const n=b.closest(".screen").querySelector("[data-next]");if(n)n.removeAttribute("aria-disabled")}
-function toRoad(){const r=A("money","5_20")==="u5"?"3.0a":(A("fear","mid")==="high"?"3.0b":"3.0");st.cur=0;st.checked.clear();st.limit=null;location.hash="#"+r;return false}
+function toRoad(){const r=A("money","5_20")==="u5"?"3.0a":(A("fear","mid")==="high"?"3.0b":"3.0");st.cur=0;st.checked.clear();st.limit=null;st.shown=false;st.save="";st.rule="";resetDetail();location.hash="#"+r;return false}
+function resetDetail(){document.querySelectorAll("[data-k]").forEach(b=>{b.classList.remove("on");b.querySelector(".mk").textContent="☐"});$("go33").setAttribute("aria-disabled","true");document.querySelectorAll(".chips button").forEach(b=>b.classList.remove("on"));document.querySelectorAll(".cnote").forEach(n=>n.style.display="none");$("go34").setAttribute("aria-disabled","true");const a=$("agree42");a.classList.remove("on");a.textContent="☐ 위 내용을 읽고 이해했어요";$("go42").setAttribute("aria-disabled","true");$("amt43").value="";document.querySelectorAll("[data-q=rule] .opt,[data-q=fear2] .opt").forEach(b=>b.classList.remove("on"));document.querySelectorAll("#\\34 \\.4 [data-next],#\\34 \\.5 [data-next]").forEach(b=>b.setAttribute("aria-disabled","true"))}
 function goRoad(){location.hash="#"+st.road;return false}
 function goBack(){location.hash="#"+(st.prev||st.road);return false}
 function term(n){st.term=n;location.hash="#3.1"}
@@ -320,14 +336,24 @@ function renderRoad(el,max){
   s.items.forEach(it=>{const on=st.checked.has(it.k);
    h+='<div class="item"><span class="cb'+(on?" on":"")+'" role="checkbox" aria-checked="'+on+'" onclick="toggle(\''+it.k+'\')">'+(on?"✓":"")+"</span><span>"+it.t+"</span>"+(it.go?'<a class="go" href="#'+it.go+'">화면 순서 보기 ›</a>':"")+"</div>";
    if(it.inp==="flow")h+='<div class="inline"><span style="width:72px">들어오는 돈</span><input inputmode="numeric" placeholder="원"></div><div class="inline"><span style="width:72px">나가는 돈</span><input inputmode="numeric" placeholder="원"></div>';
-   if(it.inp==="save")h+='<div class="inline">월 <input inputmode="numeric" placeholder="원"> 원 (펼쳐서 바로 적어요)</div>';});
+   if(it.inp==="save")h+='<div class="inline">월 <input inputmode="numeric" placeholder="원" value="'+(st.save||"")+'" oninput="st.save=this.value"> 원 (펼쳐서 바로 적어요)</div>';});
   h+='<button class="tbtn" onclick="already('+i+')">이미 했어요 (이 단계 전체 체크)</button></div>';}
  if(st.cur>max)h+='<div class="info"><b>'+(max===4?"모든 단계를 마쳤어요.":"지금 할 수 있는 단계를 모두 마쳤어요.")+"</b></div>";
  if(max<4)h+='<div class="info">나머지 단계는 상황이 바뀌면 열어 드릴게요.</div>';
  h+='<p class="s">체크를 모두 마치면 다음 단계가 열려요. 진행 상황은 이 기기에만 저장돼요.</p><a class="btn sub" href="#2.1" onclick="toast(\'진단을 다시 시작해요\')">상황이 바뀌었어요</a>';
  el.innerHTML=h}
-function renderRoads(){document.querySelectorAll(".road").forEach(el=>renderRoad(el,+el.dataset.max))}
-function setCur(n){st.cur=n;renderRoads()}
+function renderRoads(){document.querySelectorAll(".road").forEach(el=>renderRoad(el,+el.dataset.max));const r=document.querySelector(".screen.on .road");if(r&&st.cur>+r.dataset.max&&!st.shown){st.shown=true;setTimeout(()=>{location.hash="#3.5"},400)}}
+const MAX={"3.0":4,"3.0a":2,"3.0b":3};
+function on35(){const max=MAX[st.road]||4,cur=Math.min(st.cur,max+1);
+ $("road35").textContent=sumLine();
+ $("title35").textContent=max===4?"모든 단계를 마쳤어요":"지금 할 수 있는 단계를 모두 마쳤어요";
+ let d="";for(let i=0;i<=max;i++)d+='<div class="item"><span class="cb'+(i<cur?" on":"")+'">'+(i<cur?"✓":"")+"</span><span>"+i+"단계 · "+STG[i].name+"</span></div>";
+ d+='<p class="s" style="margin:8px 0 0">매달 모을 금액: <b>'+(st.save?Number(String(st.save).replace(/[^0-9]/g,"")).toLocaleString("ko-KR")+"원":"로드맵 0단계에서 적은 금액")+"</b>"+(max===4&&cur>4?" · 손실 한도: <b>"+won(st.limit||recLimit())+"</b>":"")+"</p>";
+ $("done35").innerHTML=d;
+ const nx=["매달 정한 금액을 꾸준히 모아요."];if(max===4)nx.push("값이 내려가면 내가 정한 규칙을 따라요.");nx.push("실제 상품 조건은 금융회사에서 확인해요. 차근차근은 상품을 추천하지 않아요.");
+ $("next35").innerHTML=nx.map(x=>"· "+x).join("<br>");
+ $("rule35").innerHTML=max===4?'<div class="warn"><b>내가 정한 하락 대응 규칙</b><br>'+(st.rule||"정해 둔 손실 한도에 닿으면 더 사지 않아요")+"</div>":""}
+function setCur(n){st.cur=n;st.shown=true;renderRoads()}
 function advance(){const s=STG[st.cur];if(s&&s.items&&s.items.every(it=>st.checked.has(it.k))){st.cur++;toast("다음 단계가 열렸어요")}}
 function toggle(k){st.checked.has(k)?st.checked.delete(k):st.checked.add(k);advance();renderRoads()}
 function already(i){const s=STG[i];if(s.items)s.items.forEach(it=>st.checked.add(it.k));st.cur=Math.max(st.cur,i+1);toast(i+"단계를 한 번에 체크했어요");renderRoads()}
@@ -359,10 +385,10 @@ function on45(){updateLimitText();if(!st.pending||st.pending<=st.limit)st.pendin
 /* 2단계, 3단계 상세 */
 function on33(){const m=A("money","5_20"),inc=A("income","stable");$("sum33").textContent=sumLine();$("flex33").style.display=inc==="stable"?"none":"block";
  $("amt33").textContent="제안 금액: 월 "+won(floor1(BASE[m]*INC[inc]))+" (모을 수 있는 금액의 기준값 "+BASE[m]/10000+"만 원"+(inc==="stable"?"":", 수입이 달라서 낮게 제안해요")+"). 직접 바꿀 수 있어요."}
-function tick(b){b.classList.toggle("on");b.childNodes[0].nodeValue=b.classList.contains("on")?"☑ ":"☐ ";const all=[...b.closest(".card").querySelectorAll("[data-k]")].every(x=>x.classList.contains("on"));$("go33").setAttribute("aria-disabled",!all)}
+function tick(b){b.classList.toggle("on");b.querySelector(".mk").textContent=b.classList.contains("on")?"☑":"☐";const all=[...b.closest(".card").querySelectorAll("[data-k]")].every(x=>x.classList.contains("on"));$("go33").setAttribute("aria-disabled",!all)}
 function chip(b){const g=b.parentElement;g.querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");g.parentElement.querySelector(".cnote").style.display=b.textContent==="해당돼요"?"none":"block";const ok=[...$("3.4").querySelectorAll(".chips")].every(c=>c.querySelector(".on"));$("go34").setAttribute("aria-disabled",!ok)}
 
-const ON={"3.0":renderRoads,"3.0a":renderRoads,"3.0b":renderRoads,"3.1":on31,"4.1":on41,"4.2":updateLimitText,"4.3":on43,"4.5":on45,"3.3":on33};
+const ON={"3.0":renderRoads,"3.0a":renderRoads,"3.0b":renderRoads,"3.1":on31,"4.1":on41,"4.2":updateLimitText,"4.3":on43,"4.5":on45,"3.3":on33,"3.5":on35};
 
 function show(){const id=decodeURIComponent(location.hash.slice(1));const t=S.find(s=>s.id===id)||S[0];if(id&&!S.some(s=>s.id===id))toast("아직 만들지 않은 화면이에요");const cur=S.find(s=>s.classList.contains("on"));if(cur&&cur!==t)st.prev=cur.id;if(["3.0","3.0a","3.0b"].includes(t.id))st.road=t.id;S.forEach(s=>s.classList.toggle("on",s===t));L.classList.remove("on");if(ON[t.id])ON[t.id]();window.scrollTo(0,0)}
 addEventListener("hashchange",show);show();
