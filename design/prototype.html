@@ -115,7 +115,7 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
 
 <section class="screen" id="3.0" data-name="맞춤 로드맵">
 <div class="wrap"><div class="road" data-max="4"></div>
-  <div class="alt"><button onclick="setCur(0)">0단계부터 보기</button><button onclick="setCur(4)">4단계가 열린 모습</button><button onclick="setCur(5)">다 마친 모습</button></div>
+  <div class="alt"><button onclick="setCur(0)">0단계 진행 중</button><button onclick="setCur(1)">1단계 진행 중</button><button onclick="setCur(2)">2단계가 열린 모습</button><button onclick="setCur(3)">3단계가 열린 모습</button><button onclick="setCur(4)">4단계가 열린 모습</button><button onclick="setCur(5)">다 마친 모습</button></div>
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div>
 </section>
@@ -314,7 +314,7 @@ function renderRoad(el,max){
  let h='<h1 class="t">내 시작 로드맵</h1><p class="s" style="margin:0 0 12px">'+sumLine()+"</p>";
  for(let i=0;i<=max;i++){const s=STG[i],lbl=i+"단계 · "+s.name;
   if(i<st.cur){h+='<div class="card done"><h2 class="st" style="margin:0">'+lbl+' <span class="tag">완료</span></h2></div>';continue}
-  if(i>st.cur){h+='<div class="card lock"><h2 class="st" style="margin:0">'+lbl+(i===4?' <span class="tag gray">시작 전 한도 설정</span>':"")+'</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div>';continue}
+  if(i>st.cur){h+='<div class="card lock" role="button" onclick="toast(\'앞 단계 항목을 모두 체크하면 열려요\')" style="cursor:pointer"><h2 class="st" style="margin:0">'+lbl+(i===4?' <span class="tag gray">시작 전 한도 설정</span>':"")+'</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div>';continue}
   if(s.card){h+='<div class="card now"><a class="whole" href="#'+s.card+'" onclick="st.mode=\'set\'"><h2 class="st">'+lbl+' <span class="tag">진행 중</span></h2><p class="s" style="margin:0">눌러서 시작해요 ›</p></a>'+(i<4?'<button class="tbtn" onclick="already('+i+')">이미 했어요 (이 단계 전체 체크)</button>':"")+"</div>";continue}
   h+='<div class="card now"><h2 class="st">'+lbl+' <span class="tag">진행 중</span></h2>';
   s.items.forEach(it=>{const on=st.checked.has(it.k);
