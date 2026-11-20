@@ -33,6 +33,14 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
 .term{color:var(--main);text-decoration:underline dotted;text-underline-offset:3px;font-weight:700;cursor:pointer}
 .ph{display:flex;align-items:center;justify-content:center;background:var(--gray);border-radius:var(--radius);color:var(--sub);font-size:13px;min-height:140px;margin:8px 0 16px}
 .legal{margin:16px -20px 0;padding:12px 20px 16px;background:var(--gray);text-align:center;font-size:12px;color:var(--sub)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:20px 20px 0 0;padding:22px 20px 24px;box-shadow:0 -8px 24px rgba(0,0,0,.15)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.chips button{min-height:44px;padding:0 12px;border:1.5px solid var(--line);border-radius:22px;background:#fff;font-size:14px;font-family:inherit;cursor:pointer;color:var(--text)}.chips button.on{border-color:var(--main);background:var(--main);color:#fff;font-weight:700}
+.item{display:flex;align-items:center;gap:10px;min-height:44px;font-size:15px}
+.cb{width:24px;height:24px;border:2px solid var(--main);border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:14px;cursor:pointer;background:#fff;position:relative}.cb::after{content:"";position:absolute;inset:-10px}.cb.on{background:var(--main)}
+.go{margin-left:auto;color:var(--main);font-size:13px;font-weight:700;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;white-space:nowrap}
+.inline{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding-left:34px;font-size:13px;color:var(--sub);margin-bottom:6px}.inline input{width:84px;min-height:44px;border:1.5px solid var(--line);border-radius:8px;padding:0 8px;font-size:15px;font-family:inherit}
+.card a.whole{display:block;text-decoration:none;color:inherit;min-height:44px}
+.tag.gray{background:var(--gray);border:1px solid var(--line)}
 .alt{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:8px 0 4px}
 .alt button{font-size:12px;min-height:32px;padding:0 10px;border:1px dashed var(--line);background:#fff;border-radius:8px;color:var(--sub);cursor:pointer;font-family:inherit}
 </style></head><body>
@@ -54,6 +62,223 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
 </div>
 <script>function s1_0(r){const b=document.getElementById("s1_0go");b.textContent=r?"이어서 하기":"시작하기";b.href=r?"#3.0":"#2.1";toast(r?"기록이 있을 때 모습이에요":"처음 방문 모습이에요")}</script>
 </section>
+<section class="screen" id="2.1" data-name="진단 1 여유자금">
+<div class="wrap">
+  <div class="topbar"><span>1 / 3</span><span></span></div>
+  <div class="progress"><i style="width:33%"></i></div>
+  <h1 class="t">매달 모을 수 있는 돈은<br>어느 정도예요?</h1>
+  <p class="s" style="margin:0 0 14px">정확하지 않아도 괜찮아요.</p>
+  <div data-q="money">
+    <button class="opt" data-v="u5" onclick="pick(this)">5만 원 미만</button>
+    <button class="opt" data-v="5_20" onclick="pick(this)">5만 ~ 20만 원</button>
+    <button class="opt" data-v="20_50" onclick="pick(this)">20만 ~ 50만 원</button>
+    <button class="opt" data-v="o50" onclick="pick(this)">50만 원 이상</button>
+  </div>
+  <div class="grow"></div>
+  <a class="btn" data-next aria-disabled="true" href="#2.2">다음</a>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="2.2" data-name="진단 2 손실 불안">
+<div class="wrap">
+  <div class="topbar"><a class="back" href="#2.1">← 이전 질문</a><span>2 / 3</span></div>
+  <div class="progress"><i style="width:66%"></i></div>
+  <h1 class="t">투자한 돈이 줄어들면<br>어떨 것 같아요?</h1>
+  <div data-q="fear">
+    <button class="opt" data-v="high" onclick="pick(this)">조금만 줄어도 잠이 안 와요</button>
+    <button class="opt" data-v="mid" onclick="pick(this)">조금은 괜찮지만 많이 줄면 힘들어요</button>
+    <button class="opt" data-v="ok" onclick="pick(this)">어느 정도 줄어드는 건 감수할 수 있어요</button>
+  </div>
+  <div class="info">정답은 없어요. 나에게 맞는 속도를 찾기 위한 질문이에요.</div>
+  <div class="grow"></div>
+  <a class="btn" data-next aria-disabled="true" href="#2.3">다음</a>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="2.3" data-name="진단 3 수입 안정성">
+<div class="wrap">
+  <div class="topbar"><a class="back" href="#2.2">← 이전 질문</a><span>3 / 3</span></div>
+  <div class="progress"><i style="width:100%"></i></div>
+  <h1 class="t">매달 들어오는 수입은<br>어떤가요?</h1>
+  <div data-q="income">
+    <button class="opt" data-v="stable" onclick="pick(this)">월급처럼 매달 비슷해요</button>
+    <button class="opt" data-v="vary" onclick="pick(this)">달마다 차이가 있어요</button>
+    <button class="opt" data-v="none" onclick="pick(this)">아직 정해진 수입이 없어요</button>
+  </div>
+  <div class="grow"></div>
+  <a class="btn" data-next aria-disabled="true" href="#3.0" onclick="return toRoad()">다음</a>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="3.0" data-name="맞춤 로드맵">
+<div class="wrap"><div class="road" data-max="4"></div>
+  <div class="alt"><button onclick="setCur(0)">0단계부터 보기</button><button onclick="setCur(4)">4단계가 열린 모습</button><button onclick="setCur(5)">다 마친 모습</button></div>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="3.1" data-name="용어 사전">
+<div class="wrap" style="position:relative">
+  <h1 class="t">내 시작 로드맵</h1>
+  <div class="card now"><h2 class="st">지금 보고 있던 단계</h2><p class="s">용어를 닫으면 보던 화면으로 돌아가요.</p></div>
+  <div class="grow"></div>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,.35)"></div>
+  <div class="sheet">
+    <h2 class="st" id="termName">파킹통장</h2>
+    <p class="b" id="termDesc"></p>
+    <div class="info" id="termEx"></div>
+    <div class="warn" id="termWarn"></div>
+    <a class="btn sub" href="#" onclick="return goBack()">닫기</a>
+  </div>
+</div>
+</section>
+
+<section class="screen" id="3.2" data-name="1단계 상세와 행동 지원">
+<div class="wrap">
+  <div class="topbar"><a class="back" href="#" onclick="return goRoad()">← 로드맵</a><span>1단계 · 파킹통장 만들기</span></div>
+  <h1 class="t">비상금 소액 옮겨 보기</h1>
+  <div class="info"><b>은행 앱에서 이렇게 해 보세요</b><br>① 쓰고 있는 은행 앱을 열어요<br>② 이자를 주는 입출금 통장(<span class="term" onclick="term('파킹통장')">파킹통장</span>)을 골라요<br>③ 부담 없는 금액을 옮겨 보세요</div>
+  <div class="ph">화면 순서 그림 자리</div>
+  <div class="warn"><b>소액이라 부담 없어요.</b> 언제든 다시 꺼낼 수 있어요.</div>
+  <div class="info">차근차근은 특정 은행이나 상품을 추천하지 않아요.</div>
+  <div class="grow"></div>
+  <a class="btn" href="#" onclick="return doneItem('s1i1')">다 했어요</a>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="4.1" data-name="손실 한도 설정">
+<div class="wrap">
+  <div class="topbar"><a class="back" href="#" onclick="return limitBack()">← 뒤로</a><span>4단계 · 소액 주식 · 시작 전</span></div>
+  <h1 class="t">이만큼까지는<br>잃어도 괜찮다 싶은 금액은요?</h1>
+  <div class="info">앞에서는 불안한 느낌을 물었어요. 여기서는 실제로 잃어도 괜찮은 금액을 정해요.</div>
+  <p class="s">이 금액 안에서만 다음 단계를 열어 드려요.</p>
+  <div style="font-size:30px;font-weight:700;text-align:center;margin:16px 0 4px" id="limitVal">60,000원</div>
+  <input type="range" id="limitRange" min="0" max="500000" step="10000" style="width:100%;height:44px;accent-color:var(--main)" oninput="limitInput()">
+  <div class="s" style="display:flex;justify-content:space-between"><span>0원</span><span>50만 원</span></div>
+  <div class="info" id="limitWhy" style="margin-top:12px"></div>
+  <div class="grow"></div>
+  <a class="btn" href="#" onclick="return limitNext()">다음</a>
+  <div class="alt"><button onclick="st.mode='set';on41()">처음 설정할 때 보기</button><button onclick="st.mode='change';on41()">한도 바꾸기로 들어왔을 때 보기</button></div>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="4.2" data-name="4단계 열기 전 필수 안내">
+<div class="wrap">
+  <div class="topbar"><a class="back" href="#" onclick="return goRoad()">← 뒤로</a><span>4단계 · 소액 주식</span></div>
+  <h1 class="t">시작하기 전에<br>꼭 알아 두세요</h1>
+  <div class="warn"><b>주식은 원금이 줄 수 있어요.</b> 투자한 돈의 일부 또는 전부를 잃을 수도 있어요.</div>
+  <div class="info"><b>내 손실 한도는 <span class="limitText">60,000원</span>이에요.</b> 이 금액 안에서만 시작해요.</div>
+  <div class="info">차근차근은 특정 종목이나 상품을 추천하지 않아요.</div>
+  <div class="info">투자 결정의 책임은 본인에게 있어요.</div>
+  <button class="opt" id="agree42" onclick="this.classList.toggle('on');this.textContent=(this.classList.contains('on')?'☑':'☐')+' 위 내용을 읽고 이해했어요';document.getElementById('go42').setAttribute('aria-disabled',!this.classList.contains('on'))">☐ 위 내용을 읽고 이해했어요</button>
+  <div class="grow"></div>
+  <a class="btn" id="go42" aria-disabled="true" href="#4.3">4단계 시작하기</a>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="4.3" data-name="4단계 투자 금액 입력">
+<div class="wrap">
+  <div class="topbar"><a class="back" href="#" onclick="return goRoad()">← 로드맵</a><span>4단계 · 소액 주식</span></div>
+  <h1 class="t">얼마로 시작해 볼까요?</h1>
+  <p class="s">내 손실 한도: <b class="limitText">60,000원</b></p>
+  <input id="amt43" inputmode="numeric" placeholder="금액을 입력해 주세요" oninput="check43()" style="width:100%;min-height:56px;border:1.5px solid var(--line);border-radius:var(--radius);font-size:22px;font-weight:700;text-align:center;font-family:inherit;margin:8px 0 10px">
+  <div class="warn" id="over43" style="display:none"><b>이 금액은 넣을 수 없어요.</b> <span class="limitText">60,000원</span>은 내가 정한 한도예요. 한도 안의 금액으로 입력해 주세요.</div>
+  <div id="quick43"></div>
+  <div style="text-align:right"><a class="tbtn" href="#4.1" onclick="st.mode='change'">한도 바꾸기</a></div>
+  <div class="grow"></div>
+  <a class="btn" id="go43" aria-disabled="true" href="#4.4">다음</a>
+  <div class="alt"><button onclick="setAmt(st.limit+40000)">한도 초과 입력 보기</button><button onclick="setAmt(Math.round(st.limit/2/10000)*10000||10000)">한도 안 입력 보기</button></div>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="4.4" data-name="4단계 하락 대응 규칙">
+<div class="wrap">
+  <div class="topbar"><a class="back" href="#4.3">← 이전</a><span>4단계 · 소액 주식</span></div>
+  <h1 class="t">값이 내려갔을 때<br>어떻게 할지 미리 정해요</h1>
+  <p class="s" style="margin:0 0 14px">미리 정해 두면 흔들릴 때 덜 불안해요. 사고팔지는 내가 정해요.</p>
+  <div data-q="rule">
+    <button class="opt" data-v="nobuy" onclick="pick(this);document.getElementById('own44').style.display='none'">정해 둔 손실 한도에 닿으면 더 사지 않아요</button>
+    <button class="opt" data-v="wait" onclick="pick(this);document.getElementById('own44').style.display='none'">값이 내려가면 바로 판단하지 않고 시간을 두고 다시 살펴봐요</button>
+    <button class="opt" data-v="own" onclick="pick(this);document.getElementById('own44').style.display='block'">직접 규칙 쓰기</button>
+  </div>
+  <textarea id="own44" placeholder="내 규칙을 적어 주세요" style="display:none;width:100%;min-height:80px;border:1.5px solid var(--line);border-radius:var(--radius);padding:12px;font-size:15px;font-family:inherit;margin-bottom:10px"></textarea>
+  <div class="info">내가 정한 규칙이에요. 차근차근은 사고팔 시점을 알려 주지 않아요.</div>
+  <div class="grow"></div>
+  <a class="btn" data-next aria-disabled="true" href="#" onclick="st.cur=5;toast('저장됐어요');return goRoad()">내 규칙으로 저장</a>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="4.5" data-name="한도 올리기 재진단">
+<div class="wrap">
+  <div class="topbar"><a class="back" href="#4.1">← 뒤로</a><span id="chg45">손실 한도 변경</span></div>
+  <h1 class="t">투자한 돈이 줄어들면<br>어떨 것 같아요?</h1>
+  <div data-q="fear2">
+    <button class="opt" data-v="high" onclick="pick(this)">조금만 줄어도 잠이 안 와요</button>
+    <button class="opt" data-v="mid" onclick="pick(this)">조금은 괜찮지만 많이 줄면 힘들어요</button>
+    <button class="opt" data-v="ok" onclick="pick(this)">어느 정도 줄어드는 건 감수할 수 있어요</button>
+  </div>
+  <div class="warn" id="warn45"><b>한도를 올리면 잃을 수 있는 금액도 커져요.</b></div>
+  <div class="grow"></div>
+  <a class="btn" data-next aria-disabled="true" href="#" onclick="st.limit=st.pending;toast('한도를 바꿨어요');location.hash='#4.3';return false">확인하고 한도 바꾸기</a>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="3.0a" data-name="로드맵: 여유자금 5만 원 미만">
+<div class="wrap"><div class="road" data-max="2"></div>
+  <div class="alt"><button onclick="setCur(0)">0단계부터 보기</button><button onclick="setCur(3)">0~2단계를 다 마친 모습</button></div>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="3.3" data-name="2단계 상세">
+<div class="wrap">
+  <div class="topbar"><a class="back" href="#" onclick="return goRoad()">← 로드맵</a><span>2단계 · 적금 시작하기</span></div>
+  <h1 class="t">적금 시작하기</h1>
+  <p class="s" id="sum33"></p>
+  <div class="warn" id="flex33"><b>먼저 알아 두세요</b><br>금액을 자유롭게 넣는 유형(자유적금 등)도 있어요. 상품마다 조건이 다르니 확인해 보세요. 납입이 부담되면 중도 해지할 수 있지만 이자 혜택이 줄 수 있어요.</div>
+  <div class="card now">
+    <h2 class="st">체크리스트 <span class="tag">진행 중</span></h2>
+    <button class="opt" style="display:block" data-k="s2i0" onclick="tick(this)">☐ <span class="term" onclick="event.stopPropagation();term('적금')">적금</span>이 뭔지, 파킹통장과 뭐가 다른지 알아보기</button>
+    <button class="opt" style="display:block" data-k="s2i1" onclick="tick(this)">☐ 부담 없이 납입할 금액 정하기</button>
+    <div class="info" id="amt33" style="margin:0"></div>
+  </div>
+  <div class="grow"></div>
+  <a class="btn" id="go33" aria-disabled="true" href="#" onclick="st.cur=Math.max(st.cur,3);toast('2단계를 마쳤어요');return goRoad()">다 했어요</a>
+  <div class="alt"><button onclick="st.a.income='stable';on33()">수입이 일정할 때 보기</button><button onclick="st.a.income='vary';on33()">수입이 달라질 때 보기</button></div>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="3.4" data-name="3단계 상세 (ISA)">
+<div class="wrap">
+  <div class="topbar"><a class="back" href="#" onclick="return goRoad()">← 로드맵</a><span>3단계 · ISA 알아보기</span></div>
+  <h1 class="t"><span class="term" onclick="term('ISA')">ISA</span>는 세금 혜택이<br>있는 계좌예요</h1>
+  <div class="info"><b>내가 써도 되는지 확인해요</b><br>조건마다 하나씩 골라 주세요. 실제 조건 문구는 확인 후 넣어요.</div>
+  <div class="card"><h2 class="st">조건 1 (확인 후 입력)</h2><div class="chips" data-c="c1"><button onclick="chip(this)">해당돼요</button><button onclick="chip(this)">아니에요</button><button onclick="chip(this)">잘 모르겠어요</button></div><p class="s cnote" style="display:none;margin:8px 0 0">실제로 가입할 수 있는지는 금융회사에서 확인해요.</p></div>
+  <div class="card"><h2 class="st">조건 2 (확인 후 입력)</h2><div class="chips" data-c="c2"><button onclick="chip(this)">해당돼요</button><button onclick="chip(this)">아니에요</button><button onclick="chip(this)">잘 모르겠어요</button></div><p class="s cnote" style="display:none;margin:8px 0 0">실제로 가입할 수 있는지는 금융회사에서 확인해요.</p></div>
+  <div class="warn"><b>주의</b> ISA에 담는 상품에 따라 원금이 줄 수 있어요.</div>
+  <div class="grow"></div>
+  <a class="btn" id="go34" aria-disabled="true" href="#" onclick="st.cur=Math.max(st.cur,4);toast('3단계를 마쳤어요');return goRoad()">다 했어요</a>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
+
+<section class="screen" id="3.0b" data-name="로드맵: 손실 불안이 큰 경우">
+<div class="wrap"><div class="road" data-max="3"></div>
+  <div class="alt"><button onclick="setCur(1)">1단계 진행 중 보기</button><button onclick="setCur(4)">0~3단계를 다 마친 모습</button></div>
+  <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
+</div>
+</section>
 <!-- 화면 끝 -->
 </div>
 <div id="toast"></div>
@@ -62,6 +287,83 @@ const S=[...document.querySelectorAll(".screen")],L=document.getElementById("lis
 L.innerHTML=S.map(s=>`<a href="#${s.id}">${s.id} ${s.dataset.name||""}</a>`).join("");
 document.getElementById("idx").onclick=()=>L.classList.toggle("on");
 function toast(m){T.textContent=m;T.classList.add("on");clearTimeout(T._t);T._t=setTimeout(()=>T.classList.remove("on"),1600)}
-function show(){const id=decodeURIComponent(location.hash.slice(1));const t=S.find(s=>s.id===id)||S[0];if(id&&!S.some(s=>s.id===id))toast("아직 만들지 않은 화면이에요");S.forEach(s=>s.classList.toggle("on",s===t));L.classList.remove("on");window.scrollTo(0,0)}
+/* 화면 공통 동작 (상태는 이 페이지 안에서만 기억해요) */
+const st={a:{money:null,fear:null,income:null},cur:0,checked:new Set(),limit:null,pending:null,mode:"set",road:"3.0",prev:null,term:"파킹통장"};
+const BASE={u5:25000,"5_20":125000,"20_50":350000,o50:500000};
+const FEAR={high:.5,mid:.5,ok:1};
+const INC={stable:.5,vary:.25,none:.1};
+const LBL={money:{u5:"5만 원 미만","5_20":"5~20만 원","20_50":"20~50만 원",o50:"50만 원 이상"},fear:{high:"불안 큼",mid:"안정 우선",ok:"감수 가능"},income:{stable:"월급형",vary:"달마다 수입 차이",none:"정해진 수입 없음"}};
+const $=id=>document.getElementById(id);
+const A=(k,d)=>st.a[k]||d;
+const won=n=>Number(n).toLocaleString("ko-KR")+"원";
+const floor1=n=>Math.max(10000,Math.floor(n/10000)*10000);
+const sumLine=()=>[LBL.money[A("money","5_20")],LBL.fear[A("fear","mid")],LBL.income[A("income","stable")]].join(" · ");
+
+function pick(b){const g=b.parentElement;g.querySelectorAll(".opt").forEach(x=>x.classList.remove("on"));b.classList.add("on");if(g.dataset.q in st.a)st.a[g.dataset.q]=b.dataset.v;const n=b.closest(".screen").querySelector("[data-next]");if(n)n.removeAttribute("aria-disabled")}
+function toRoad(){const r=A("money","5_20")==="u5"?"3.0a":(A("fear","mid")==="high"?"3.0b":"3.0");st.cur=0;st.checked.clear();st.limit=null;location.hash="#"+r;return false}
+function goRoad(){location.hash="#"+st.road;return false}
+function goBack(){location.hash="#"+(st.prev||st.road);return false}
+function term(n){st.term=n;location.hash="#3.1"}
+
+/* 로드맵 */
+const STG=[
+ {name:"용어·기초 익히기",items:[{k:"s0i0",t:"내 한 달 돈 흐름 적어 보기",inp:"flow"},{k:"s0i1",t:"매달 모을 금액 정하기",inp:"save"}]},
+ {name:"파킹통장 만들기",items:[{k:"s1i0",t:'<span class="term" onclick="term(\'파킹통장\')">파킹통장</span>이 뭔지 알아보기'},{k:"s1i1",t:"비상금 소액 옮겨 보기",go:"3.2"}]},
+ {name:"적금 시작하기",card:"3.3"},{name:"ISA 알아보기",card:"3.4"},{name:"소액 주식",card:"4.1"}];
+function renderRoad(el,max){
+ let h='<h1 class="t">내 시작 로드맵</h1><p class="s" style="margin:0 0 12px">'+sumLine()+"</p>";
+ for(let i=0;i<=max;i++){const s=STG[i],lbl=i+"단계 · "+s.name;
+  if(i<st.cur){h+='<div class="card done"><h2 class="st" style="margin:0">'+lbl+' <span class="tag">완료</span></h2></div>';continue}
+  if(i>st.cur){h+='<div class="card lock"><h2 class="st" style="margin:0">'+lbl+(i===4?' <span class="tag gray">시작 전 한도 설정</span>':"")+'</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div>';continue}
+  if(s.card){h+='<div class="card now"><a class="whole" href="#'+s.card+'" onclick="st.mode=\'set\'"><h2 class="st">'+lbl+' <span class="tag">진행 중</span></h2><p class="s" style="margin:0">눌러서 시작해요 ›</p></a>'+(i<4?'<button class="tbtn" onclick="already('+i+')">이미 했어요 (이 단계 전체 체크)</button>':"")+"</div>";continue}
+  h+='<div class="card now"><h2 class="st">'+lbl+' <span class="tag">진행 중</span></h2>';
+  s.items.forEach(it=>{const on=st.checked.has(it.k);
+   h+='<div class="item"><span class="cb'+(on?" on":"")+'" role="checkbox" aria-checked="'+on+'" onclick="toggle(\''+it.k+'\')">'+(on?"✓":"")+"</span><span>"+it.t+"</span>"+(it.go?'<a class="go" href="#'+it.go+'">화면 순서 보기 ›</a>':"")+"</div>";
+   if(it.inp==="flow")h+='<div class="inline"><span style="width:72px">들어오는 돈</span><input inputmode="numeric" placeholder="원"></div><div class="inline"><span style="width:72px">나가는 돈</span><input inputmode="numeric" placeholder="원"></div>';
+   if(it.inp==="save")h+='<div class="inline">월 <input inputmode="numeric" placeholder="원"> 원 (펼쳐서 바로 적어요)</div>';});
+  h+='<button class="tbtn" onclick="already('+i+')">이미 했어요 (이 단계 전체 체크)</button></div>';}
+ if(st.cur>max)h+='<div class="info"><b>'+(max===4?"모든 단계를 마쳤어요.":"지금 할 수 있는 단계를 모두 마쳤어요.")+"</b></div>";
+ if(max<4)h+='<div class="info">나머지 단계는 상황이 바뀌면 열어 드릴게요.</div>';
+ h+='<p class="s">체크를 모두 마치면 다음 단계가 열려요. 진행 상황은 이 기기에만 저장돼요.</p><a class="btn sub" href="#2.1" onclick="toast(\'진단을 다시 시작해요\')">상황이 바뀌었어요</a>';
+ el.innerHTML=h}
+function renderRoads(){document.querySelectorAll(".road").forEach(el=>renderRoad(el,+el.dataset.max))}
+function setCur(n){st.cur=n;renderRoads()}
+function advance(){const s=STG[st.cur];if(s&&s.items&&s.items.every(it=>st.checked.has(it.k))){st.cur++;toast("다음 단계가 열렸어요")}}
+function toggle(k){st.checked.has(k)?st.checked.delete(k):st.checked.add(k);advance();renderRoads()}
+function already(i){const s=STG[i];if(s.items)s.items.forEach(it=>st.checked.add(it.k));st.cur=Math.max(st.cur,i+1);toast(i+"단계를 한 번에 체크했어요");renderRoads()}
+function doneItem(k){st.checked.add(k);toast("체크했어요");advance();return goRoad()}
+
+/* 용어 사전 */
+const TERMS={
+ "파킹통장":{d:"주차장에 차를 잠깐 세워 두듯, 돈을 잠깐 넣어 두어도 이자를 주는 통장이에요. 언제든 꺼낼 수 있어요.",e:"<b>예시</b> 월급날 전까지 잠깐 두는 비상금",w:"<b>주의</b> 이자가 적금보다 낮을 수 있어요"},
+ "적금":{d:"매달 정해진 금액을 넣고, 정한 기간이 끝나면 이자와 함께 돌려받는 상품이에요.",e:"<b>예시</b> 1년 동안 매달 같은 금액 넣기",w:"<b>주의</b> 중간에 해지하면 이자 혜택이 줄 수 있어요"},
+ "ISA":{d:"세금 혜택이 있는 계좌예요.",e:"<b>예시</b> 자세한 조건은 3단계 상세에서 확인해요",w:"<b>주의</b> 담는 상품에 따라 원금이 줄 수 있어요"}};
+function on31(){const t=TERMS[st.term];$("termName").textContent=st.term;$("termDesc").textContent=t.d;$("termEx").innerHTML=t.e;$("termWarn").innerHTML=t.w}
+
+/* 4단계 */
+function recLimit(){return floor1(BASE[A("money","5_20")]*FEAR[A("fear","mid")])}
+function updateLimitText(){if(st.limit==null)st.limit=recLimit();document.querySelectorAll(".limitText").forEach(e=>e.textContent=won(st.limit))}
+function on41(){updateLimitText();const r=$("limitRange");r.value=st.limit;limitInput();
+ const m=A("money","5_20"),f=A("fear","mid");
+ $("limitWhy").textContent=st.mode==="change"?"지금 한도는 "+won(st.limit)+"이에요. 내리면 바로 적용되고, 올리면 한 번 더 확인해요.":"모을 수 있는 금액("+LBL.money[m]+")과 불안 정도를 기준으로 추천한 값이에요("+BASE[m]/10000+"만 원 × "+FEAR[f]*100+"%). 직접 바꿀 수 있어요."}
+function limitInput(){$("limitVal").textContent=won($("limitRange").value)}
+function limitNext(){const v=+$("limitRange").value;
+ if(st.mode==="change"){if(v<st.limit){st.limit=v;toast("한도를 낮췄어요");location.hash="#4.3"}else if(v>st.limit){st.pending=v;location.hash="#4.5"}else location.hash="#4.3"}
+ else{st.limit=v;location.hash="#4.2"}return false}
+function limitBack(){location.hash=st.mode==="change"?"#4.3":"#"+st.road;return false}
+function on43(){updateLimitText();$("quick43").innerHTML=[30000,st.limit].filter((v,i,a)=>v<=st.limit&&a.indexOf(v)===i).map(v=>'<button class="opt" onclick="setAmt('+v+')">'+won(v)+"</button>").join("");check43()}
+function setAmt(n){$("amt43").value=n;check43()}
+function check43(){const v=+String($("amt43").value).replace(/[^0-9]/g,"");const over=v>st.limit;$("over43").style.display=over?"block":"none";$("go43").setAttribute("aria-disabled",!(v>0&&!over))}
+function on45(){updateLimitText();if(!st.pending||st.pending<=st.limit)st.pending=st.limit*2;$("chg45").textContent="손실 한도 변경 · "+won(st.limit)+" → "+won(st.pending);$("warn45").innerHTML="<b>한도를 올리면 잃을 수 있는 금액도 커져요.</b> 최대 "+won(st.pending)+"까지 줄어들 수 있어요."}
+
+/* 2단계, 3단계 상세 */
+function on33(){const m=A("money","5_20"),inc=A("income","stable");$("sum33").textContent=sumLine();$("flex33").style.display=inc==="stable"?"none":"block";
+ $("amt33").textContent="제안 금액: 월 "+won(floor1(BASE[m]*INC[inc]))+" (모을 수 있는 금액의 기준값 "+BASE[m]/10000+"만 원"+(inc==="stable"?"":", 수입이 달라서 낮게 제안해요")+"). 직접 바꿀 수 있어요."}
+function tick(b){b.classList.toggle("on");b.childNodes[0].nodeValue=b.classList.contains("on")?"☑ ":"☐ ";const all=[...b.closest(".card").querySelectorAll("[data-k]")].every(x=>x.classList.contains("on"));$("go33").setAttribute("aria-disabled",!all)}
+function chip(b){const g=b.parentElement;g.querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");g.parentElement.querySelector(".cnote").style.display=b.textContent==="해당돼요"?"none":"block";const ok=[...$("3.4").querySelectorAll(".chips")].every(c=>c.querySelector(".on"));$("go34").setAttribute("aria-disabled",!ok)}
+
+const ON={"3.0":renderRoads,"3.0a":renderRoads,"3.0b":renderRoads,"3.1":on31,"4.1":on41,"4.2":updateLimitText,"4.3":on43,"4.5":on45,"3.3":on33};
+
+function show(){const id=decodeURIComponent(location.hash.slice(1));const t=S.find(s=>s.id===id)||S[0];if(id&&!S.some(s=>s.id===id))toast("아직 만들지 않은 화면이에요");const cur=S.find(s=>s.classList.contains("on"));if(cur&&cur!==t)st.prev=cur.id;if(["3.0","3.0a","3.0b"].includes(t.id))st.road=t.id;S.forEach(s=>s.classList.toggle("on",s===t));L.classList.remove("on");if(ON[t.id])ON[t.id]();window.scrollTo(0,0)}
 addEventListener("hashchange",show);show();
 </script></body></html>
