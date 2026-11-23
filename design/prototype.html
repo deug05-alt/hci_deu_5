@@ -27,12 +27,12 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
 .opt.on{border-color:var(--main);background:var(--main-soft);font-weight:700}
 .card{border:1.5px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;background:#fff}
 .card.now{border-color:var(--main)}.card.lock{background:var(--gray);border-style:dashed;color:var(--sub)}
-.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent);color:var(--text);vertical-align:2px;margin-left:6px}
+.tag{display:inline-block;font-size:13px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent);color:var(--text);vertical-align:2px;margin-left:6px}
 .info{background:var(--main-soft);border-radius:var(--radius);padding:12px 14px;font-size:13px;line-height:1.6;color:var(--text);margin-bottom:10px}
 .warn{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:var(--radius);padding:12px 14px;font-size:13px;line-height:1.6;color:var(--text);margin-bottom:10px}
 .term{color:var(--main);text-decoration:underline dotted;text-underline-offset:3px;font-weight:700;cursor:pointer}
 .ph{display:flex;align-items:center;justify-content:center;background:var(--gray);border-radius:var(--radius);color:var(--sub);font-size:13px;min-height:140px;margin:8px 0 16px}
-.legal{margin:16px -20px 0;padding:12px 20px 16px;background:var(--gray);text-align:center;font-size:12px;color:var(--sub)}
+.legal{margin:16px -20px 0;padding:12px 20px 16px;background:var(--gray);text-align:center;font-size:13px;color:var(--sub)}
 .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:20px 20px 0 0;padding:22px 20px 24px;box-shadow:0 -8px 24px rgba(0,0,0,.15)}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.chips button{min-height:44px;padding:0 12px;border:1.5px solid var(--line);border-radius:22px;background:#fff;font-size:14px;font-family:inherit;cursor:pointer;color:var(--text)}.chips button.on{border-color:var(--main);background:var(--main);color:#fff;font-weight:700}
 .item{display:flex;align-items:center;gap:10px;min-height:44px;font-size:15px}
@@ -170,7 +170,7 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
 
 <section class="screen" id="4.2" data-name="4단계 열기 전 필수 안내">
 <div class="wrap">
-  <div class="topbar"><a class="back" href="#" onclick="return goRoad()">← 뒤로</a><span>4단계 · 소액 주식</span></div>
+  <div class="topbar"><a class="back" href="#" onclick="return goRoad()">← 로드맵</a><span>4단계 · 소액 주식</span></div>
   <h1 class="t">시작하기 전에<br>꼭 알아 두세요</h1>
   <div class="warn"><b><span class="term" onclick="term('주식')">주식</span>은 <span class="term" onclick="term('원금')">원금</span>이 줄 수 있어요.</b> 투자한 돈의 일부 또는 전부를 잃을 수도 있어요.</div>
   <div class="info"><b>내 <span class="term" onclick="term('손실 한도')">손실 한도</span>는 <span class="limitText">60,000원</span>이에요.</b> 이 금액 안에서만 시작해요.</div>
@@ -201,7 +201,7 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
 
 <section class="screen" id="4.4" data-name="4단계 하락 대응 규칙">
 <div class="wrap">
-  <div class="topbar"><a class="back" href="#4.3">← 이전</a><span>4단계 · 소액 주식</span></div>
+  <div class="topbar"><a class="back" href="#4.3">← 뒤로</a><span>4단계 · 소액 주식</span></div>
   <h1 class="t">값이 내려갔을 때<br>어떻게 할지 미리 정해요</h1>
   <p class="s" style="margin:0 0 14px">미리 정해 두면 흔들릴 때 덜 불안해요. 사고팔지는 내가 정해요.</p>
   <div data-q="rule">
@@ -209,10 +209,12 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
     <button class="opt" data-v="wait" onclick="pick(this);document.getElementById('own44').style.display='none'">값이 내려가면 바로 판단하지 않고 시간을 두고 다시 살펴봐요</button>
     <button class="opt" data-v="own" onclick="pick(this);document.getElementById('own44').style.display='block'">직접 규칙 쓰기</button>
   </div>
-  <textarea id="own44" placeholder="내 규칙을 적어 주세요" style="display:none;width:100%;min-height:80px;border:1.5px solid var(--line);border-radius:var(--radius);padding:12px;font-size:15px;font-family:inherit;margin-bottom:10px"></textarea>
+  <textarea id="own44" oninput="$('err44').style.display='none'" placeholder="내 규칙을 적어 주세요" style="display:none;width:100%;min-height:80px;border:1.5px solid var(--line);border-radius:var(--radius);padding:12px;font-size:15px;font-family:inherit;margin-bottom:10px"></textarea>
+  <div class="warn" id="err44" style="display:none"><b>내 규칙을 적어 주세요.</b> 칸이 비어 있으면 저장할 수 없어요.</div>
   <div class="info">내가 정한 규칙이에요. 차근차근은 사고팔 시점을 알려 주지 않아요.</div>
   <div class="grow"></div>
-  <a class="btn" data-next aria-disabled="true" href="#" onclick="const o=this.closest('.screen').querySelector('[data-q=rule] .on');st.rule=o&&o.dataset.v==='own'?(document.getElementById('own44').value||'직접 쓴 규칙'):(o?o.textContent:'');st.cur=5;toast('저장됐어요');return goRoad()">내 규칙으로 저장</a>
+  <a class="btn" data-next aria-disabled="true" href="#" onclick="return save44()">내 규칙으로 저장</a>
+  <div class="alt"><button onclick="demo44(true)">직접 규칙을 비운 채 저장해 보기</button><button onclick="demo44(false)">정상 모습</button></div>
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div>
 </section>
@@ -391,6 +393,10 @@ function on33(){const m=A("money","5_20"),inc=A("income","stable");$("sum33").te
 function tick(b){b.classList.toggle("on");b.querySelector(".mk").textContent=b.classList.contains("on")?"☑":"☐";const all=[...b.closest(".card").querySelectorAll("[data-k]")].every(x=>x.classList.contains("on"));$("go33").setAttribute("aria-disabled",!all)}
 function chip(b){const g=b.parentElement;g.querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");g.parentElement.querySelector(".cnote").style.display=b.textContent==="해당돼요"?"none":"block";const ok=[...$("3.4").querySelectorAll(".chips")].every(c=>c.querySelector(".on"));$("go34").setAttribute("aria-disabled",!ok)}
 
+function save44(){const o=document.querySelector('[data-q=rule] .on');if(!o)return false;
+ if(o.dataset.v==="own"&&!$("own44").value.trim()){$("err44").style.display="block";toast("내 규칙을 적어 주세요");$("own44").focus();return false}
+ st.rule=o.dataset.v==="own"?$("own44").value.trim():o.textContent;st.cur=5;toast("저장됐어요");return goRoad()}
+function demo44(err){const b=document.querySelector('[data-q=rule] [data-v=own]');pick(b);$("own44").style.display="block";$("own44").value="";$("err44").style.display="none";if(err)save44()}
 const ON={"3.0":renderRoads,"3.0a":renderRoads,"3.0b":renderRoads,"3.1":on31,"4.1":on41,"4.2":updateLimitText,"4.3":on43,"4.5":on45,"3.3":on33,"3.5":on35};
 
 function show(){const id=decodeURIComponent(location.hash.slice(1));const t=S.find(s=>s.id===id)||S[0];if(id&&!S.some(s=>s.id===id))toast("아직 만들지 않은 화면이에요");const cur=S.find(s=>s.classList.contains("on"));if(cur&&cur!==t)st.prev=cur.id;if(["3.0","3.0a","3.0b"].includes(t.id))st.road=t.id;S.forEach(s=>s.classList.toggle("on",s===t));L.classList.remove("on");if(ON[t.id])ON[t.id]();window.scrollTo(0,0)}
