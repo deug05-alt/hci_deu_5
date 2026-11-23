@@ -156,7 +156,7 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
   <div class="topbar"><a class="back" href="#" onclick="return limitBack()">← 뒤로</a><span>4단계 · 소액 주식 · 시작 전</span></div>
   <h1 class="t">이만큼까지는<br>잃어도 괜찮다 싶은 금액은요?</h1>
   <div class="info">앞에서는 불안한 느낌을 물었어요. 여기서는 실제로 잃어도 괜찮은 금액을 정해요.</div>
-  <p class="s">이 금액 안에서만 다음 단계를 열어 드려요.</p>
+  <p class="s">이 금액(<span class="term" onclick="term('손실 한도')">손실 한도</span>) 안에서만 다음 단계를 열어 드려요.</p>
   <div style="font-size:30px;font-weight:700;text-align:center;margin:16px 0 4px" id="limitVal">60,000원</div>
   <input type="range" id="limitRange" min="0" max="500000" step="10000" style="width:100%;height:44px;accent-color:var(--main)" oninput="limitInput()">
   <div class="s" style="display:flex;justify-content:space-between"><span>0원</span><span>50만 원</span></div>
@@ -172,8 +172,8 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
 <div class="wrap">
   <div class="topbar"><a class="back" href="#" onclick="return goRoad()">← 뒤로</a><span>4단계 · 소액 주식</span></div>
   <h1 class="t">시작하기 전에<br>꼭 알아 두세요</h1>
-  <div class="warn"><b>주식은 원금이 줄 수 있어요.</b> 투자한 돈의 일부 또는 전부를 잃을 수도 있어요.</div>
-  <div class="info"><b>내 손실 한도는 <span class="limitText">60,000원</span>이에요.</b> 이 금액 안에서만 시작해요.</div>
+  <div class="warn"><b><span class="term" onclick="term('주식')">주식</span>은 <span class="term" onclick="term('원금')">원금</span>이 줄 수 있어요.</b> 투자한 돈의 일부 또는 전부를 잃을 수도 있어요.</div>
+  <div class="info"><b>내 <span class="term" onclick="term('손실 한도')">손실 한도</span>는 <span class="limitText">60,000원</span>이에요.</b> 이 금액 안에서만 시작해요.</div>
   <div class="info">차근차근은 특정 종목이나 상품을 추천하지 않아요.</div>
   <div class="info">투자 결정의 책임은 본인에게 있어요.</div>
   <button class="opt" id="agree42" onclick="this.classList.toggle('on');this.textContent=(this.classList.contains('on')?'☑':'☐')+' 위 내용을 읽고 이해했어요';document.getElementById('go42').setAttribute('aria-disabled',!this.classList.contains('on'))">☐ 위 내용을 읽고 이해했어요</button>
@@ -363,6 +363,9 @@ function doneItem(k){st.checked.add(k);toast("체크했어요");advance();return
 const TERMS={
  "파킹통장":{d:"주차장에 차를 잠깐 세워 두듯, 돈을 잠깐 넣어 두어도 이자를 주는 통장이에요. 언제든 꺼낼 수 있어요.",e:"<b>예시</b> 월급날 전까지 잠깐 두는 비상금",w:"<b>주의</b> 이자가 적금보다 낮을 수 있어요"},
  "적금":{d:"매달 정해진 금액을 넣고, 정한 기간이 끝나면 이자와 함께 돌려받는 상품이에요.",e:"<b>예시</b> 1년 동안 매달 같은 금액 넣기",w:"<b>주의</b> 중간에 해지하면 이자 혜택이 줄 수 있어요"},
+ "손실 한도":{d:"내가 잃어도 괜찮다고 정한 가장 큰 금액이에요. 차근차근은 이 금액 안에서만 4단계를 진행하게 해요.",e:"<b>예시</b> 한도가 6만 원이면 6만 원보다 많이 넣을 수 없어요",w:"<b>주의</b> 한도는 내가 정한 안전장치예요. 올릴 때는 한 번 더 확인해요"},
+ "원금":{d:"처음에 넣은 돈이에요.",e:"<b>예시</b> 3만 원을 넣었다면 원금은 3만 원이에요",w:"<b>주의</b> 주식은 원금보다 줄어들 수 있어요"},
+ "주식":{d:"회사의 작은 몫을 사는 거예요. 값이 오르기도 하고 내리기도 해요.",e:"<b>예시</b> 산 뒤 값이 내려가면 넣은 돈보다 줄어요",w:"<b>주의</b> 차근차근은 특정 종목을 추천하지 않아요"},
  "ISA":{d:"세금 혜택이 있는 계좌예요.",e:"<b>예시</b> 자세한 조건은 3단계 상세에서 확인해요",w:"<b>주의</b> 담는 상품에 따라 원금이 줄 수 있어요"}};
 function on31(){const t=TERMS[st.term];$("termName").textContent=st.term;$("termDesc").textContent=t.d;$("termEx").innerHTML=t.e;$("termWarn").innerHTML=t.w}
 
