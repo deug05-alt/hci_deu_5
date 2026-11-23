@@ -28,12 +28,12 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
 .opt.on{border-color:var(--main);background:var(--main-soft);font-weight:700}
 .card{border:1.5px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;background:#fff}
 .card.now{border-color:var(--main)}.card.lock{background:var(--gray);border-style:dashed;color:var(--sub)}
-.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent);color:var(--text);vertical-align:2px;margin-left:6px}
+.tag{display:inline-block;font-size:13px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent);color:var(--text);vertical-align:2px;margin-left:6px}
 .info{background:var(--main-soft);border-radius:var(--radius);padding:12px 14px;font-size:13px;line-height:1.6;color:var(--text);margin-bottom:10px}
 .warn{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:var(--radius);padding:12px 14px;font-size:13px;line-height:1.6;color:var(--text);margin-bottom:10px}
 .term{color:var(--main);text-decoration:underline dotted;text-underline-offset:3px;font-weight:700;cursor:pointer}
 .ph{display:flex;align-items:center;justify-content:center;background:var(--gray);border-radius:var(--radius);color:var(--sub);font-size:13px;min-height:140px;margin:8px 0 16px}
-.legal{margin:16px -20px 0;padding:12px 20px 16px;background:var(--gray);text-align:center;font-size:12px;color:var(--sub)}
+.legal{margin:16px -20px 0;padding:12px 20px 16px;background:var(--gray);text-align:center;font-size:13px;color:var(--sub)}
 .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:20px 20px 0 0;padding:22px 20px 24px;box-shadow:0 -8px 24px rgba(0,0,0,.15)}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.chips button{min-height:44px;padding:0 12px;border:1.5px solid var(--line);border-radius:22px;background:#fff;font-size:14px;font-family:inherit;cursor:pointer;color:var(--text)}.chips button.on{border-color:var(--main);background:var(--main);color:#fff;font-weight:700}
 .item{display:flex;align-items:center;gap:10px;min-height:44px;font-size:15px}
@@ -99,6 +99,8 @@ flowchart LR
   S3_0 -.->|"상황이 바뀌었어요"| S2_1
   S3_0 -->|"3단계까지 마치고 4단계 카드 누름"| S4_1["손실 한도 설정 4.1"]
   S4_1 -->|"다음"| S4_2["4단계 열기 전 필수 안내 4.2"]
+  S4_1 -.->|"밑줄 용어 누름"| S3_1
+  S4_2 -.->|"밑줄 용어 누름"| S3_1
   S4_1 -.->|"뒤로 가기"| S3_0
   S4_2 -.->|"뒤로 가기"| S3_0
   S4_2 -->|"확인 체크 후 4단계 시작하기"| S4_3["4단계 투자 금액 입력 4.3"]
@@ -108,11 +110,13 @@ flowchart LR
   S4_1 -.->|"올리면 재진단"| S4_5["한도 올리기 재진단 4.5"]
   S4_5 -.->|"확인하고 한도 바꾸기"| S4_3
   S4_3 -->|"금액 정함"| S4_4["4단계 하락 대응 규칙 4.4"]
-  S4_4 -->|"내 규칙으로 저장 4단계 완료 표시"| S3_0
+  S4_4 -->|"내 규칙으로 저장"| N3_5["로드맵 완료 결과 3.5 새 화면"]
+  N3_5 -->|"내 로드맵 보기"| S3_0
   classDef has fill:#e8f1ff,stroke:#4a7fd6
   classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
   classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
   class S1_0,S2_1,S2_2,S2_3,S3_0,S3_1,S3_2,S4_1,S4_2,S4_3,S4_4,S4_5 has
+  class N3_5 new
  </pre></section>
  <section class="rp-card rp-check"><h2>기획 점검 결과</h2><table class="rp-table"><tr><th>핵심 기능</th><th>판정</th><th>그래서</th></tr>
   <tr><td>진단 질문 3개</td><td style="white-space:nowrap"><span class="rp-tag rp-ok">들어감</span></td><td></td></tr>
@@ -160,17 +164,17 @@ flowchart LR
 </div>
 </section></div><figcaption>2.1 진단 1 여유자금</figcaption></figure>
   <figure class="rp-shotbox" style="margin:0"><div class="rp-shot"><section class="screen" data-name="맞춤 로드맵">
-<div class="wrap"><div class="road" data-max="4"><h1 class="t">내 시작 로드맵</h1><p class="s" style="margin:0 0 12px">5~20만 원 · 안정 우선 · 월급형</p><div class="card now"><h2 class="st">0단계 · 용어·기초 익히기 <span class="tag">진행 중</span></h2><div class="item"><span class="cb" role="checkbox" aria-checked="false" onclick="toggle('s0i0')"></span><span>내 한 달 돈 흐름 적어 보기</span></div><div class="inline"><span style="width:72px">들어오는 돈</span><input inputmode="numeric" placeholder="원"></div><div class="inline"><span style="width:72px">나가는 돈</span><input inputmode="numeric" placeholder="원"></div><div class="item"><span class="cb" role="checkbox" aria-checked="false" onclick="toggle('s0i1')"></span><span>매달 모을 금액 정하기</span></div><div class="inline">월 <input inputmode="numeric" placeholder="원"> 원 (펼쳐서 바로 적어요)</div><button class="tbtn" onclick="already(0)">이미 했어요 (이 단계 전체 체크)</button></div><div class="card lock"><h2 class="st" style="margin:0">1단계 · 파킹통장 만들기</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><div class="card lock"><h2 class="st" style="margin:0">2단계 · 적금 시작하기</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><div class="card lock"><h2 class="st" style="margin:0">3단계 · ISA 알아보기</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><div class="card lock"><h2 class="st" style="margin:0">4단계 · 소액 주식 <span class="tag gray">시작 전 한도 설정</span></h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><p class="s">체크를 모두 마치면 다음 단계가 열려요. 진행 상황은 이 기기에만 저장돼요.</p><a class="btn sub" href="#2.1" onclick="toast('진단을 다시 시작해요')">상황이 바뀌었어요</a></div>
+<div class="wrap"><div class="road" data-max="4"><h1 class="t">내 시작 로드맵</h1><p class="s" style="margin:0 0 12px">5~20만 원 · 안정 우선 · 월급형</p><div class="card now"><h2 class="st">0단계 · 내 돈 흐름 살펴보기 <span class="tag">진행 중</span></h2><div class="item"><span class="cb" role="checkbox" aria-checked="false" onclick="toggle('s0i0')"></span><span>내 한 달 돈 흐름 적어 보기</span></div><div class="inline"><span style="width:72px">들어오는 돈</span><input inputmode="numeric" placeholder="원"></div><div class="inline"><span style="width:72px">나가는 돈</span><input inputmode="numeric" placeholder="원"></div><div class="item"><span class="cb" role="checkbox" aria-checked="false" onclick="toggle('s0i1')"></span><span>매달 모을 금액 정하기</span></div><div class="inline">월 <input inputmode="numeric" placeholder="원" value="" oninput="st.save=this.value"> 원 (펼쳐서 바로 적어요)</div><button class="tbtn" onclick="already(0)">이미 했어요 (이 단계 전체 체크)</button></div><div class="card lock" role="button" onclick="toast('앞 단계 항목을 모두 체크하면 열려요')" style="cursor:pointer"><h2 class="st" style="margin:0">1단계 · 파킹통장 알아보기</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><div class="card lock" role="button" onclick="toast('앞 단계 항목을 모두 체크하면 열려요')" style="cursor:pointer"><h2 class="st" style="margin:0">2단계 · 적금 알아보기</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><div class="card lock" role="button" onclick="toast('앞 단계 항목을 모두 체크하면 열려요')" style="cursor:pointer"><h2 class="st" style="margin:0">3단계 · ISA 알아보기</h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><div class="card lock" role="button" onclick="toast('앞 단계 항목을 모두 체크하면 열려요')" style="cursor:pointer"><h2 class="st" style="margin:0">4단계 · 소액 주식 준비하기 <span class="tag gray">시작 전 한도 설정</span></h2><p class="s" style="margin:4px 0 0">앞 단계를 마치면 열려요</p></div><p class="s">체크를 모두 마치면 다음 단계가 열려요. 진행 상황은 이 기기에만 저장돼요.</p><a class="btn sub" href="#2.1" onclick="toast('진단을 다시 시작해요')">상황이 바뀌었어요</a></div>
   
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div>
 </section></div><figcaption>3.0 맞춤 로드맵</figcaption></figure>
   <figure class="rp-shotbox" style="margin:0"><div class="rp-shot"><section class="screen" data-name="손실 한도 설정">
 <div class="wrap">
-  <div class="topbar"><a class="back" href="#" onclick="return limitBack()">← 뒤로</a><span>4단계 · 소액 주식 · 시작 전</span></div>
+  <div class="topbar"><a class="back" href="#" onclick="return limitBack()">← 뒤로</a><span>4단계 · 소액 주식 준비하기 · 시작 전</span></div>
   <h1 class="t">이만큼까지는<br>잃어도 괜찮다 싶은 금액은요?</h1>
   <div class="info">앞에서는 불안한 느낌을 물었어요. 여기서는 실제로 잃어도 괜찮은 금액을 정해요.</div>
-  <p class="s">이 금액 안에서만 다음 단계를 열어 드려요.</p>
+  <p class="s">이 금액(<span class="term" onclick="term('손실 한도')">손실 한도</span>) 안에서만 다음 단계를 열어 드려요.</p>
   <div style="font-size:30px;font-weight:700;text-align:center;margin:16px 0 4px" id="limitVal">60,000원</div>
   <input type="range" id="limitRange" min="0" max="500000" step="10000" style="width:100%;height:44px;accent-color:var(--main)" oninput="limitInput()" value="60000">
   <div class="s" style="display:flex;justify-content:space-between"><span>0원</span><span>50만 원</span></div>

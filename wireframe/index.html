@@ -13,7 +13,7 @@ h1{text-align:center;font-size:20px;margin:24px 16px 4px}
 figure{margin:0;width:300px}
 figcaption{font-size:13px;font-weight:700;margin-bottom:8px}
 figcaption small{display:block;font-weight:400;color:#666}
-.phone{height:640px;background:#fff;border:2px solid #333;border-radius:22px;padding:18px 16px 40px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.phone{height:660px;background:#fff;border:2px solid #333;border-radius:22px;padding:18px 16px 40px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
 .bar{height:6px;background:#ddd;border-radius:9px}.bar i{display:block;height:100%;width:var(--p);background:#555;border-radius:9px}
 .step{font-size:11px;color:#777}
 h2{font-size:19px;margin:4px 0;line-height:1.4}
@@ -49,7 +49,7 @@ figure{scroll-margin-top:16px}
 <ul class="idx">
 <li><b>기본 흐름</b> 1 시작 · 2~4 진단 · 6 로드맵</li>
 <li><b>도움</b> 7 용어 사전 · 13 1단계 행동 지원 · 16 3단계 상세(ISA)</li>
-<li><b>4단계(소액 주식), 열 때 순서</b> 5 손실 한도 → 8 안내 → 9 금액 입력 · 15 하락 대응 규칙</li>
+<li><b>4단계(소액 주식 준비하기), 열 때 순서</b> 5 손실 한도 → 8 안내 → 9 금액 입력 · 15 하락 대응 규칙</li>
 <li><b>한도 변경</b> 10 한도 올리기 재진단</li>
 <li><b>진단 답에 따른 분기</b> 11 여유자금 적음 · 12 수입 불규칙 · 14 손실 불안 큼</li>
 <li><b>바로 가기</b> 주소 끝에 #s1 ~ #s16를 붙이면 해당 화면으로 이동합니다 (예: #s11)</li>
@@ -106,7 +106,7 @@ figure{scroll-margin-top:16px}
 
 <figure id="s5"><figcaption>5. 손실 한도 설정<small>4단계를 처음 열 때 (6번 다음), 9번의 한도 바꾸기에서도 열림</small></figcaption>
 <div class="phone">
-  <div class="step">← 뒤로 · 4단계 · 소액 주식 · 시작 전</div>
+  <div class="step">← 뒤로 · 4단계 · 소액 주식 준비하기 · 시작 전</div>
   <h2>이만큼까지는<br>잃어도 괜찮다 싶은 금액은요?</h2>
   <p>이 금액(<span class="term">손실 한도</span>) 안에서만 다음 단계를 열어 드려요.</p>
   <div class="note">앞에서는 불안한 느낌을 물었어요. 여기서는 실제로 잃어도 괜찮은 금액을 정해요.</div>
@@ -122,15 +122,15 @@ figure{scroll-margin-top:16px}
 <div class="phone">
   <h2>내 시작 로드맵</h2>
   <p>5~20만 원 · 안정 우선 · 월급형</p>
-  <div class="stage"><b>0단계 · 용어·기초 익히기 <span class="tag">진행 중</span></b>
+  <div class="stage"><b>0단계 · 내 돈 흐름 살펴보기 <span class="tag">진행 중</span></b>
     <div class="row"><span class="cb ck"></span>내 한 달 돈 흐름 적어 보기</div>
     <div class="row"><span class="cb"></span>매달 모을 금액 정하기</div>
     <div class="row" style="padding-left:23px;font-size:11px">월 <span style="display:inline-block;width:70px;border-bottom:1px solid #888">&nbsp;</span> 원 (펼쳐서 바로 적어요)</div>
     <div class="row" style="justify-content:flex-end;font-size:11px;text-decoration:underline;color:#555">이미 했어요 (이 단계 전체 체크)</div></div>
-  <div class="stage lock"><b>1단계 · 파킹통장 만들기</b></div>
-  <div class="stage lock"><b>2단계 · 적금 시작하기</b></div>
+  <div class="stage lock"><b>1단계 · 파킹통장 알아보기</b></div>
+  <div class="stage lock"><b>2단계 · 적금 알아보기</b></div>
   <div class="stage lock"><b>3단계 · ISA 알아보기</b></div>
-  <div class="stage lock"><b>4단계 · 소액 주식 <span class="tag">시작 전 한도 설정</span></b></div>
+  <div class="stage lock"><b>4단계 · 소액 주식 준비하기 <span class="tag">시작 전 한도 설정</span></b></div>
   <div class="note" style="margin-top:auto">진행 상황은 이 기기에만 저장돼요.</div>
   <div class="btn ghost">상황이 바뀌었어요</div>
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
@@ -139,7 +139,7 @@ figure{scroll-margin-top:16px}
 <figure id="s7"><figcaption>7. 용어 사전 (바텀시트)<small>밑줄 친 용어를 누르면 열림</small></figcaption>
 <div class="phone">
   <h2>내 시작 로드맵</h2>
-  <div class="stage"><b>1단계 · 파킹통장 만들기</b>
+  <div class="stage"><b>1단계 · 파킹통장 알아보기</b>
     <div class="row"><span class="cb"></span><span><span class="term">파킹통장</span>이 뭔지 알아보기</span></div></div>
   <div class="dim"></div>
   <div class="sheet">
@@ -155,7 +155,7 @@ figure{scroll-margin-top:16px}
 
 <figure id="s8"><figcaption>8. 4단계 열기 전 안내<small>읽고 확인해야 넘어가는 필수 화면</small></figcaption>
 <div class="phone">
-  <div class="step">← 뒤로 · 4단계 · 소액 주식</div>
+  <div class="step">← 뒤로 · 4단계 · 소액 주식 준비하기</div>
   <h2>시작하기 전에<br>꼭 알아 두세요</h2>
   <div class="note"><b><span class="term">주식</span>은 <span class="term">원금</span>이 줄 수 있어요.</b> 투자한 돈의 일부 또는 전부를 잃을 수도 있어요.</div>
   <div class="note"><b>내 <span class="term">손실 한도</span>는 60,000원이에요.</b> 이 금액 안에서만 시작해요.</div>
@@ -168,7 +168,7 @@ figure{scroll-margin-top:16px}
 
 <figure id="s9"><figcaption>9. 4단계 투자 금액 입력<small>한도를 넘는 금액은 막고 이유 안내</small></figcaption>
 <div class="phone">
-  <div class="step">4단계 · 소액 주식</div>
+  <div class="step">4단계 · 소액 주식 준비하기</div>
   <h2>얼마로 시작해 볼까요?</h2>
   <p>내 손실 한도: 60,000원</p>
   <div class="amount" style="border:2px solid #333;border-radius:12px;padding:14px">100,000원</div>
@@ -196,12 +196,12 @@ figure{scroll-margin-top:16px}
 <div class="phone">
   <h2>내 시작 로드맵</h2>
   <p>5만 원 미만 · 안정 우선 · 월급형</p>
-  <div class="stage"><b>0단계 · 용어·기초 익히기 <span class="tag">진행 중</span></b>
+  <div class="stage"><b>0단계 · 내 돈 흐름 살펴보기 <span class="tag">진행 중</span></b>
     <div class="row"><span class="cb"></span>내 한 달 돈 흐름 적어 보기</div>
     <div class="row"><span class="cb"></span>매달 모을 금액 정하기</div>
     <div class="row" style="justify-content:flex-end;font-size:11px;text-decoration:underline;color:#555">이미 했어요 (이 단계 전체 체크)</div></div>
-  <div class="stage lock"><b>1단계 · 파킹통장 만들기</b></div>
-  <div class="stage lock"><b>2단계 · 적금 시작하기</b></div>
+  <div class="stage lock"><b>1단계 · 파킹통장 알아보기</b></div>
+  <div class="stage lock"><b>2단계 · 적금 알아보기</b></div>
   <div class="note">나머지 단계는 상황이 바뀌면 열어 드릴게요.</div>
   <div class="note">진행 상황은 이 기기에만 저장돼요.</div>
   <div class="btn ghost" style="margin-top:auto">상황이 바뀌었어요</div>
@@ -210,7 +210,7 @@ figure{scroll-margin-top:16px}
 
 <figure id="s12"><figcaption>12. 로드맵: 수입이 달라지는 경우<small>2단계 앞에 유연한 상품 안내, 낮은 금액 제안</small></figcaption>
 <div class="phone">
-  <h2>2단계 · 적금 시작하기</h2>
+  <h2>2단계 · 적금 알아보기</h2>
   <p>5~20만 원 · 안정 우선 · 달마다 수입 차이</p>
   <div class="note"><b>먼저 알아 두세요</b><br>금액을 자유롭게 넣는 유형(자유적금 등)도 있어요. 상품마다 조건이 다르니 확인해 보세요. 납입이 부담되면 중도 해지할 수 있지만 이자 혜택이 줄 수 있어요.</div>
   <div class="stage"><b>체크리스트 <span class="tag">진행 중</span></b>
@@ -224,7 +224,7 @@ figure{scroll-margin-top:16px}
 
 <figure id="s13"><figcaption>13. 1단계 상세 + 행동 지원<small>은행 앱 화면 순서 안내 + 안전 안내, 특정 은행 연결 없음</small></figcaption>
 <div class="phone">
-  <div class="step">1단계 · 파킹통장 만들기</div>
+  <div class="step">1단계 · 파킹통장 알아보기</div>
   <div class="stage"><div class="row" style="margin-top:0"><span class="cb ck"></span>파킹통장이 뭔지 알아보기</div>
     <div class="row"><span class="cb"></span><b>비상금 소액 옮겨 보기</b></div></div>
   <div class="note"><b>은행 앱에서 이렇게 해 보세요</b><br>① 쓰고 있는 은행 앱을 열어요<br>② 이자를 주는 입출금 통장(파킹통장)을 골라요<br>③ 부담 없는 금액을 옮겨 보세요</div>
@@ -239,12 +239,12 @@ figure{scroll-margin-top:16px}
 <div class="phone">
   <h2>내 시작 로드맵</h2>
   <p>5~20만 원 · 잠이 안 올 만큼 불안 · 월급형</p>
-  <div class="stage"><b>0단계 · 용어·기초 익히기 <span class="tag">완료</span></b></div>
-  <div class="stage"><b>1단계 · 파킹통장 만들기 <span class="tag">진행 중</span></b>
+  <div class="stage"><b>0단계 · 내 돈 흐름 살펴보기 <span class="tag">완료</span></b></div>
+  <div class="stage"><b>1단계 · 파킹통장 알아보기 <span class="tag">진행 중</span></b>
     <div class="row"><span class="cb ck"></span>파킹통장이 뭔지 알아보기</div>
     <div class="row"><span class="cb"></span>비상금 소액 옮겨 보기</div>
     <div class="row" style="justify-content:flex-end;font-size:11px;text-decoration:underline;color:#555">이미 했어요 (이 단계 전체 체크)</div></div>
-  <div class="stage lock"><b>2단계 · 적금 시작하기</b></div>
+  <div class="stage lock"><b>2단계 · 적금 알아보기</b></div>
   <div class="stage lock"><b>3단계 · ISA 알아보기</b></div>
   <div class="note">나머지 단계는 상황이 바뀌면 열어 드릴게요.</div>
   <div class="note">체크를 모두 마치면 다음 단계가 열려요. 진행 상황은 이 기기에만 저장돼요.</div>
@@ -254,7 +254,7 @@ figure{scroll-margin-top:16px}
 
 <figure id="s15"><figcaption>15. 4단계 하락 대응 규칙<small>체크리스트 항목, 내 규칙을 미리 정하기</small></figcaption>
 <div class="phone">
-  <div class="step">4단계 · 소액 주식</div>
+  <div class="step">4단계 · 소액 주식 준비하기</div>
   <h2>값이 내려갔을 때<br>어떻게 할지 미리 정해요</h2>
   <p>미리 정해 두면 흔들릴 때 덜 불안해요. 사고팔지는 내가 정해요.</p>
   <div class="opt">정해 둔 손실 한도에 닿으면 더 사지 않아요</div>
