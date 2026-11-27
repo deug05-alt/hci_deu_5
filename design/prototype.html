@@ -57,10 +57,10 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
   <div class="info">기록은 이 기기에만 저장돼요. 기기를 바꾸거나 브라우저 데이터를 지우면 사라져요.</div>
   <div class="grow"></div>
   <a class="btn" id="s1_0go" href="#2.1">시작하기</a>
-  <div class="alt"><button onclick="s1_0(false)">처음 방문 보기</button><button onclick="s1_0(true)">기록이 있을 때 보기</button></div>
+  <div class="alt"><button onclick="s1_0(false)">처음 방문 보기</button><button onclick="s1_0(true,'3.0')">기록 있음: 기본</button><button onclick="s1_0(true,'3.0a')">기록 있음: 여유자금 적음</button><button onclick="s1_0(true,'3.0b')">기록 있음: 불안 큼</button></div>
   <div class="legal">투자 권유가 아니라 정보·교육을 위한 서비스예요</div>
 </div>
-<script>function s1_0(r){const b=document.getElementById("s1_0go");b.textContent=r?"이어서 하기":"시작하기";b.href=r?"#3.0":"#2.1";toast(r?"기록이 있을 때 모습이에요":"처음 방문 모습이에요")}</script>
+<script>function s1_0(r,road,quiet){const b=document.getElementById("s1_0go");if(r&&road)st.road=road;b.textContent=r?"이어서 하기":"시작하기";b.href=r?"#"+(road||st.road):"#2.1";if(!quiet)toast(r?"기록이 있을 때 모습이에요 (로드맵 "+(road||st.road)+")":"처음 방문 모습이에요")}</script>
 </section>
 <section class="screen" id="2.1" data-name="진단 1 여유자금">
 <div class="wrap">
@@ -253,6 +253,7 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
     <button class="opt" style="display:block" data-k="s2i0" onclick="tick(this)"><span class="mk">☐</span> <span class="term" onclick="event.stopPropagation();term('적금')">적금</span>이 뭔지, 파킹통장과 뭐가 다른지 알아보기</button>
     <button class="opt" style="display:block" data-k="s2i1" onclick="tick(this)"><span class="mk">☐</span> 부담 없이 납입할 금액 정하기</button>
     <div class="info" id="amt33" style="margin:0"></div>
+    <div class="inline" style="padding-left:0;margin-top:8px">납입 금액: 월 <input id="pay33" inputmode="numeric" oninput="st.pay=this.value" style="width:110px"> 원</div>
   </div>
   <div class="grow"></div>
   <a class="btn" id="go33" aria-disabled="true" href="#" onclick="st.cur=Math.max(st.cur,3);toast('2단계를 마쳤어요');return goRoad()">다 했어요</a>
@@ -317,7 +318,7 @@ const floor1=n=>Math.max(10000,Math.floor(n/10000)*10000);
 const sumLine=()=>[LBL.money[A("money","5_20")],LBL.fear[A("fear","mid")],LBL.income[A("income","stable")]].join(" · ");
 
 function pick(b){const g=b.parentElement;g.querySelectorAll(".opt").forEach(x=>x.classList.remove("on"));b.classList.add("on");if(g.dataset.q in st.a)st.a[g.dataset.q]=b.dataset.v;const n=b.closest(".screen").querySelector("[data-next]");if(n)n.removeAttribute("aria-disabled")}
-function toRoad(){const r=A("money","5_20")==="u5"?"3.0a":(A("fear","mid")==="high"?"3.0b":"3.0");st.cur=0;st.checked.clear();st.limit=null;st.shown=false;st.save="";st.rule="";resetDetail();location.hash="#"+r;return false}
+function toRoad(){const r=roadFor();st.pay="";st.cur=0;st.checked.clear();st.limit=null;st.shown=false;st.save="";st.rule="";resetDetail();location.hash="#"+r;return false}
 function resetDetail(){document.querySelectorAll("[data-k]").forEach(b=>{b.classList.remove("on");b.querySelector(".mk").textContent="☐"});$("go33").setAttribute("aria-disabled","true");document.querySelectorAll(".chips button").forEach(b=>b.classList.remove("on"));document.querySelectorAll(".cnote").forEach(n=>n.style.display="none");$("go34").setAttribute("aria-disabled","true");const a=$("agree42");a.classList.remove("on");a.textContent="☐ 위 내용을 읽고 이해했어요";$("go42").setAttribute("aria-disabled","true");$("amt43").value="";document.querySelectorAll("[data-q=rule] .opt,[data-q=fear2] .opt").forEach(b=>b.classList.remove("on"));document.querySelectorAll("#\\34 \\.4 [data-next],#\\34 \\.5 [data-next]").forEach(b=>b.setAttribute("aria-disabled","true"))}
 function goRoad(){location.hash="#"+st.road;return false}
 function goBack(){location.hash="#"+(st.prev||st.road);return false}
@@ -389,7 +390,7 @@ function on45(){updateLimitText();if(!st.pending||st.pending<=st.limit)st.pendin
 
 /* 2단계, 3단계 상세 */
 function on33(){const m=A("money","5_20"),inc=A("income","stable");$("sum33").textContent=sumLine();$("flex33").style.display=inc==="stable"?"none":"block";
- $("amt33").textContent="제안 금액: 월 "+won(floor1(BASE[m]*INC[inc]))+" (모을 수 있는 금액의 기준값 "+BASE[m]/10000+"만 원"+(inc==="stable"?"":", 수입이 달라서 낮게 제안해요")+"). 직접 바꿀 수 있어요."}
+ $("amt33").textContent="제안 금액: 월 "+won(floor1(BASE[m]*INC[inc]))+" (모을 수 있는 금액의 기준값 "+BASE[m]/10000+"만 원"+(inc==="stable"?"":", 수입이 달라서 낮게 제안해요")+"). 아래 칸에서 직접 바꿀 수 있어요.";$("pay33").value=st.pay||floor1(BASE[m]*INC[inc])}
 function tick(b){b.classList.toggle("on");b.querySelector(".mk").textContent=b.classList.contains("on")?"☑":"☐";const all=[...b.closest(".card").querySelectorAll("[data-k]")].every(x=>x.classList.contains("on"));$("go33").setAttribute("aria-disabled",!all)}
 function chip(b){const g=b.parentElement;g.querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");g.parentElement.querySelector(".cnote").style.display=b.textContent==="해당돼요"?"none":"block";const ok=[...$("3.4").querySelectorAll(".chips")].every(c=>c.querySelector(".on"));$("go34").setAttribute("aria-disabled",!ok)}
 
@@ -397,7 +398,9 @@ function save44(){const o=document.querySelector('[data-q=rule] .on');if(!o)retu
  if(o.dataset.v==="own"&&!$("own44").value.trim()){$("err44").style.display="block";toast("내 규칙을 적어 주세요");$("own44").focus();return false}
  st.rule=o.dataset.v==="own"?$("own44").value.trim():o.textContent;st.cur=5;toast("저장됐어요");return goRoad()}
 function demo44(err){const b=document.querySelector('[data-q=rule] [data-v=own]');pick(b);$("own44").style.display="block";$("own44").value="";$("err44").style.display="none";if(err)save44()}
-const ON={"3.0":renderRoads,"3.0a":renderRoads,"3.0b":renderRoads,"3.1":on31,"4.1":on41,"4.2":updateLimitText,"4.3":on43,"4.5":on45,"3.3":on33,"3.5":on35};
+function roadFor(){return A("money","5_20")==="u5"?"3.0a":(A("fear","mid")==="high"?"3.0b":"3.0")}
+function on10(){const done=st.a.money&&st.a.fear&&st.a.income;s1_0(!!done,done?roadFor():null,true)}
+const ON={"1.0":on10,"3.0":renderRoads,"3.0a":renderRoads,"3.0b":renderRoads,"3.1":on31,"4.1":on41,"4.2":updateLimitText,"4.3":on43,"4.5":on45,"3.3":on33,"3.5":on35};
 
 function show(){const id=decodeURIComponent(location.hash.slice(1));const t=S.find(s=>s.id===id)||S[0];if(id&&!S.some(s=>s.id===id))toast("아직 만들지 않은 화면이에요");const cur=S.find(s=>s.classList.contains("on"));if(cur&&cur!==t)st.prev=cur.id;if(["3.0","3.0a","3.0b"].includes(t.id))st.road=t.id;S.forEach(s=>s.classList.toggle("on",s===t));L.classList.remove("on");if(ON[t.id])ON[t.id]();window.scrollTo(0,0)}
 addEventListener("hashchange",show);show();

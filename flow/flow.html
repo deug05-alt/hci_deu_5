@@ -53,6 +53,7 @@ flowchart LR
   S3_0 --> S3_3
   S3_3 --> S3_0
   S3_0B --> S3_3
+  S3_0A --> S3_3
   S3_3 --> S3_0B
   S3_0 --> N3_4
   S3_0B --> N3_4
@@ -132,16 +133,18 @@ flowchart LR
   S2_3 -.->|"이전 질문"| S2_2
   S3_0A -.->|"밑줄 친 용어 누름"| S3_1["용어 사전 3.1"]
   S3_1 -.->|"닫기"| S3_0A
-  S3_0A -->|"항목 체크 0단계에서 2단계까지 차례로 열림"| S3_0A
+  S3_0A -->|"0·1단계 항목 체크로 2단계 열림"| S3_0A
   S3_0A -.->|"상황이 바뀌었어요"| S2_1
   S3_0A -->|"0~2단계 모두 마침"| N3_5["로드맵 완료 결과 3.5 새 화면"]
   N3_5 -->|"내 로드맵 보기"| S3_0A
+  S3_0A -->|"열린 2단계 카드 누름"| S3_3["2단계 상세 3.3"]
+  S3_3 -->|"적금 알아보고 납입 금액 정해 체크"| S3_0A
   S3_0A -.->|"1단계 비상금 소액 옮겨 보기 항목 누름"| S3_2["1단계 상세와 행동 지원 3.2"]
   S3_2 -.->|"다 했어요"| S3_0A
   classDef has fill:#e8f1ff,stroke:#4a7fd6
   classDef none fill:#fff4e0,stroke:#d68a1a,stroke-dasharray:4
   classDef new fill:#ffecec,stroke:#c44,stroke-dasharray:4
-  class S1_0,S2_1,S2_2,S2_3,S3_0A,S3_1,S3_2 has
+  class S1_0,S2_1,S2_2,S2_3,S3_0A,S3_1,S3_2,S3_3 has
   class N3_5 new
 </pre></div>
 <h2>플로우 3: 수입이 달라지는 경우 시나리오 B</h2>
