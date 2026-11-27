@@ -266,9 +266,10 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
 <div class="wrap">
   <div class="topbar"><a class="back" href="#" onclick="return goRoad()">← 로드맵</a><span>3단계 · ISA 알아보기</span></div>
   <h1 class="t"><span class="term" onclick="term('ISA')">ISA</span>는 세금 혜택이<br>있는 계좌예요</h1>
-  <div class="info"><b>내가 써도 되는지 확인해요</b><br>조건마다 하나씩 골라 주세요. 실제 조건 문구는 확인 후 넣어요.</div>
-  <div class="card"><h2 class="st">조건 1 (확인 후 입력)</h2><div class="chips" data-c="c1"><button onclick="chip(this)">해당돼요</button><button onclick="chip(this)">아니에요</button><button onclick="chip(this)">잘 모르겠어요</button></div><p class="s cnote" style="display:none;margin:8px 0 0">실제로 가입할 수 있는지는 금융회사에서 확인해요.</p></div>
-  <div class="card"><h2 class="st">조건 2 (확인 후 입력)</h2><div class="chips" data-c="c2"><button onclick="chip(this)">해당돼요</button><button onclick="chip(this)">아니에요</button><button onclick="chip(this)">잘 모르겠어요</button></div><p class="s cnote" style="display:none;margin:8px 0 0">실제로 가입할 수 있는지는 금융회사에서 확인해요.</p></div>
+  <div class="info"><b>내가 써도 되는지 확인해요</b><br>조건마다 하나씩 골라 주세요.</div>
+  <div class="card"><h2 class="st">조건 1. 만 19세 이상이고 국내에 살고 있어요</h2><p class="s" style="margin:0 0 4px">만 15~19세는 지난해 일해서 번 소득(근로소득)이 있으면 가능해요.</p><div class="chips" data-c="c1"><button onclick="chip(this)">해당돼요</button><button onclick="chip(this)">아니에요</button><button onclick="chip(this)">잘 모르겠어요</button></div><p class="s cnote" style="display:none;margin:8px 0 0">실제로 가입할 수 있는지는 금융회사에서 확인해요.</p></div>
+  <div class="card"><h2 class="st">조건 2. 최근 3년 동안 이자·배당으로 1년에 2,000만 원 넘게 번 적이 없어요</h2><p class="s" style="margin:0 0 4px">이 금액을 넘으면 세금을 따로 계산하는데(금융소득종합과세), 그런 해가 있었다면 가입할 수 없어요.</p><div class="chips" data-c="c2"><button onclick="chip(this)">해당돼요</button><button onclick="chip(this)">아니에요</button><button onclick="chip(this)">잘 모르겠어요</button></div><p class="s cnote" style="display:none;margin:8px 0 0">실제로 가입할 수 있는지는 금융회사에서 확인해요.</p></div>
+  <p class="s" style="margin:0 0 10px">ISA는 한 사람당 하나만 만들 수 있어요. 2026년 11월 기준 조건이에요.</p>
   <div class="warn"><b>주의</b> ISA에 담는 상품에 따라 원금이 줄 수 있어요.</div>
   <div class="grow"></div>
   <a class="btn" id="go34" aria-disabled="true" href="#" onclick="st.cur=Math.max(st.cur,4);toast('3단계를 마쳤어요');return goRoad()">다 했어요</a>
