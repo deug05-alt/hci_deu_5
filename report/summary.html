@@ -33,6 +33,7 @@ p.b{font-size:15px;line-height:1.6;margin:0 0 12px;color:var(--text)}
 .warn{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:var(--radius);padding:12px 14px;font-size:13px;line-height:1.6;color:var(--text);margin-bottom:10px}
 .term{color:var(--main);text-decoration:underline dotted;text-underline-offset:3px;font-weight:700;cursor:pointer}
 .ph{display:flex;align-items:center;justify-content:center;background:var(--gray);border-radius:var(--radius);color:var(--sub);font-size:13px;min-height:140px;margin:8px 0 16px}
+.illu{display:block;width:100%;height:auto;margin:8px 0 16px;border-radius:var(--radius)}
 .legal{margin:16px -20px 0;padding:12px 20px 16px;background:var(--gray);text-align:center;font-size:13px;color:var(--sub)}
 .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:20px 20px 0 0;padding:22px 20px 24px;box-shadow:0 -8px 24px rgba(0,0,0,.15)}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.chips button{min-height:44px;padding:0 12px;border:1.5px solid var(--line);border-radius:22px;background:#fff;font-size:14px;font-family:inherit;cursor:pointer;color:var(--text)}.chips button.on{border-color:var(--main);background:var(--main);color:#fff;font-weight:700}
@@ -132,7 +133,29 @@ flowchart LR
  <section class="rp-card rp-screens"><h2>주요 화면 (핵심 플로우 순서)</h2><div class="rp-shots">
   <figure class="rp-shotbox" style="margin:0"><div class="rp-shot"><section class="screen" data-name="시작 화면">
 <div class="wrap">
-  <div class="ph">서비스 일러스트 자리</div>
+  <svg class="illu" viewBox="0 0 350 200" role="img" aria-label="무한 리본이 감싼 돈주머니 일러스트" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="ilBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8EDF5"/><stop offset="1" stop-color="#F7F9FC"/></linearGradient>
+  <radialGradient id="ilBag" cx=".38" cy=".38" r=".75"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#DCE4F0"/><stop offset="1" stop-color="#AEBFD6"/></radialGradient>
+  <linearGradient id="ilTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F7FB"/><stop offset="1" stop-color="#BCCBDF"/></linearGradient>
+  <linearGradient id="ilNeck" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8C9BB0"/><stop offset=".4" stop-color="#E9EEF5"/><stop offset="1" stop-color="#7D8CA3"/></linearGradient>
+  <linearGradient id="ilRib" gradientUnits="userSpaceOnUse" x1="23" y1="0" x2="327" y2="0"><stop offset="0" stop-color="#5B93E6"/><stop offset=".5" stop-color="#3B7BE0"/><stop offset="1" stop-color="#2B4C7E"/></linearGradient>
+  <radialGradient id="ilSh" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2B4C7E" stop-opacity=".22"/><stop offset="1" stop-color="#2B4C7E" stop-opacity="0"/></radialGradient>
+ </defs>
+ <rect width="350" height="200" rx="12" fill="url(#ilBg)"/>
+ <ellipse cx="175" cy="186" rx="70" ry="8" fill="url(#ilSh)"/>
+ <!-- 뒤쪽 리본 -->
+ <path d="M175,108 C215,68 322,58 322,108 C322,158 215,148 175,108 C135,68 28,58 28,108 C28,158 135,148 175,108Z" fill="none" stroke="url(#ilRib)" stroke-width="10" stroke-linejoin="round"/>
+ <!-- 주머니 -->
+ <path d="M153,68 C147,56 140,44 134,32 Q148,40 159,29 Q171,40 183,27 Q195,40 207,30 Q213,37 217,33 C211,46 204,58 197,68Z" fill="url(#ilTop)"/>
+ <path d="M152,72 C118,90 100,120 108,150 C116,178 150,183 175,183 C200,183 234,178 242,150 C250,120 232,90 198,72Z" fill="url(#ilBag)"/>
+ <path d="M128,104 C122,118 121,134 126,146" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+ <rect x="148" y="63" width="54" height="11" rx="5.5" fill="url(#ilNeck)"/>
+ <text x="175" y="146" text-anchor="middle" font-family="system-ui,'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-weight="800" font-size="50" fill="#7F90AA" opacity=".85">₩</text>
+ <!-- 앞쪽 리본 -->
+ <path d="M86.5,74.25 C118.25,75.5 155,88 175,108 C195,128 231.75,140.5 263.5,141.75" fill="none" stroke="url(#ilRib)" stroke-width="10"/>
+ <path d="M92,72.5 C120,73.5 155,86 175,106 C195,126 230,138.5 258,139.8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".45"/>
+</svg>
   <p class="s" style="font-weight:700;color:var(--main);margin:0">막막할 땐, 차근차근</p>
   <h1 class="t">재테크, 뭐부터 해야 할지 막막하죠?<br>차근차근 알려드릴게요</h1>
   <p class="b">질문 3개에 답하면 나에게 맞는 시작 순서를 알려 드려요. 1분이면 돼요.</p>
